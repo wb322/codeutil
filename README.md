@@ -1,5 +1,6 @@
 #### 说明
-本工具根据黑马刘皇叔codeutil工具为基础优化扩展.
+1. 本工具根据黑马刘皇叔codeutil工具为基础优化扩展[链接](https://gitee.com/chuanzhiliubei/codeutil)
+
 #### 安装教程
 
 1. 安装jdk1.8 并配置环境变量
