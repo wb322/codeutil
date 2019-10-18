@@ -76,7 +76,7 @@ public class Code {
 						outFile=outFile.replace("[Table2]", Utils.getClassName(table.getName2()) );	
 						outFile=outFile.replace("[table2]", table.getName2() );
 
-						//<wb 替换为后设置文件路径/>
+						//<wb 替换后设置文件路径/>
 						String pathAfter = t.getPath ().replace ("[table]",table.getName());
 						pathAfter = pathAfter.replace ("[Table]", Utils.getClassName(table.getName()) );
 						pathAfter = pathAfter.replace("[Table2]", Utils.getClassName(table.getName2()) );

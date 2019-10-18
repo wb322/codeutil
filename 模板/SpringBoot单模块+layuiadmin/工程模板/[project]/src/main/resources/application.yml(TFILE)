@@ -1,0 +1,28 @@
+server: 
+  port: 8080
+spring: 
+  application:  
+    name: [project] #指定服务名
+  datasource:  
+    driverClassName: com.mysql.cj.jdbc.Driver #[driverName]
+    url: [url]&useSSL=false&serverTimezone=UTC
+    username: [dbuser]
+    password: [dbpassword]
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false #表与实体类字段驼峰映射
+  global-config:
+    banner: true
+    db-config:
+      id-type: auto
+      #table-prefix:  #表前缀
+  mapper-locations: classpath:mapper/*
+  check-config-location: true #是否检查 MyBatis XML 文件的存在
+#日志
+logging:
+  config: classpath:log/log4j2_dev.xml

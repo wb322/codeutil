@@ -273,7 +273,7 @@ public class CodeUtil extends javax.swing.JFrame {
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
-								.addGap(96, 96, 96)
+								.addGap(26, 26, 26)
 								.addGroup(
 										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.BASELINE)
