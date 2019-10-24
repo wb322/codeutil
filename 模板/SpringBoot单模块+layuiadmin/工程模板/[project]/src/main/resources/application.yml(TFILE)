@@ -21,6 +21,9 @@ mybatis-plus:
     db-config:
       id-type: auto
       #table-prefix:  #表前缀
+      select-strategy: not_empty
+      insert-strategy: not_empty
+      update-strategy: not_empty
   mapper-locations: classpath:mapper/*
   check-config-location: true #是否检查 MyBatis XML 文件的存在
 #日志

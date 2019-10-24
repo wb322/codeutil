@@ -272,11 +272,12 @@ public class DatabaseUtil extends javax.swing.JFrame {
 		for (String key : dbMap.keySet()) {
 			this.jComboBox1.addItem(key);
 		}
-		//<wb 第二次启动使用上一次的用户名和密码/>
+		//<wb 第二次启动使用上一次的数据库信息/>
 		Map<String, String> publicMap = xml.XmlUtil.read("publicMap.xml");
 		if (publicMap != null && publicMap.size() > 0) {
 			this.jTextField1.setText (publicMap.get("dbuser"));
 			this.jTextField2.setText (publicMap.get("dbpassword"));
+			this.jTextField3.setText (publicMap.get("dburl"));
 			this.jComboBox1.setSelectedItem (publicMap.get("dbtype"));
 		}
 
@@ -351,7 +352,7 @@ public class DatabaseUtil extends javax.swing.JFrame {
 					  CodeUtil codeUtil = new CodeUtil();
 						codeUtil.setVisible(true);
 						codeUtil.setDbInfo(db, jTextField1.getText(),
-							jTextField2.getText(),jComboBox1.getSelectedItem ().toString ());
+							jTextField2.getText(),jComboBox1.getSelectedItem ().toString (),jTextField3.getText());
 
 					  setVisible(false);
 					  
@@ -364,7 +365,7 @@ public class DatabaseUtil extends javax.swing.JFrame {
 			 CodeUtil codeUtil = new CodeUtil();
 				codeUtil.setVisible(true);
 				codeUtil.setDbInfo(db, jTextField1.getText(),
-					jTextField2.getText(),jComboBox1.getSelectedItem ().toString ());
+					jTextField2.getText(),jComboBox1.getSelectedItem ().toString (),jTextField3.getText());
 
 			  setVisible(false);
 		 }

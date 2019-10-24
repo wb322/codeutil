@@ -68,7 +68,6 @@ public class Result implements Serializable {
         return new Result (code,msg,data);
     }
     public static Result body(IPage page){
-        PageResult pageResult = new PageResult (page);
-        return new Result (ResultEnum.SELECT_SUCCESS.getCode (),ResultEnum.SELECT_SUCCESS.getMsg (),pageResult);
+        return new PageResult (ResultEnum.SELECT_SUCCESS.getCode (),ResultEnum.SELECT_SUCCESS.getMsg (),page.getRecords (),page.getTotal ());
     }
 }

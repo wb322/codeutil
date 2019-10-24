@@ -71,7 +71,7 @@ public class LogAspect extends BaseController {
             map.put("contentType",contentType);
             //获取请求参数
             Object[] args = joinPoint.getArgs();
-            map.put("params",args);
+            map.put("args",args);
 
             // 获取请求头token
             //String header = request.getHeader ("");

@@ -420,11 +420,13 @@ public class CodeUtil extends javax.swing.JFrame {
 	}
 
 	private String dbtype;
-	public void setDbInfo(String dbName, String dbuser, String dbpassword,String dbtype) {
+	private String dburl;
+	public void setDbInfo(String dbName, String dbuser, String dbpassword,String dbtype,String dburl) {
 		this.jTextField10.setText(dbName);
 		this.jTextField11.setText(dbuser);
 		this.jTextField12.setText(dbpassword);
 		this.dbtype =dbtype;
+		this.dburl =dburl;
 
 	}
 
@@ -459,6 +461,7 @@ public class CodeUtil extends javax.swing.JFrame {
 						publicMap.put("dbuser", jTextField11.getText());
 						publicMap.put("dbpassword", jTextField12.getText());
 					  	publicMap.put("dbtype", dbtype);
+					  	publicMap.put("dburl", dburl);
 						String s = jTextField7.getText().replace(".", ",");
 						String[] paths = s.split(",");
 						for (int i = 0; i < paths.length; i++) {

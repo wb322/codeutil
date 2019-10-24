@@ -44,9 +44,10 @@
         var ajaxConfig = {
             type:type,
             url:url,
-            data:data,
+            data:JSON.stringify(data),
             dataType:"JSON",
             timeout:20000,
+            contentType:"application/json;utf-8",
             success:function(d){
                 if (callback != null) {
                     callback(d);
@@ -84,12 +85,12 @@
         var code = layui.setter.response.statusCode.ok;
         var msg = layui.setter.response.msgName;
         var data = layui.setter.response.dataName;
-        if (d[name] == d[code]) {
+        if (d[name] == code) {
             layer.alert(d[msg], {icon: 6});
-            return true,d[data];
+            return {f:true,d:d[data]};
         }else{
             layer.alert(d[msg], {icon: 5});
-            return false,d[data];
+            return {f:false,d:d[data]};
         }
     };
     /**---------------------------------------------layui---------------------------------------------------*/
