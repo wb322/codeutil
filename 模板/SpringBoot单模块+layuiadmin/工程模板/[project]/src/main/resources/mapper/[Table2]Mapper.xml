@@ -5,10 +5,13 @@
     <resultMap id="BaseResultMap" type="[package].entity.[Table2]">
 <mapper.key.txt><mapper.nokey.txt>
     </resultMap>
-    <!-- 通用查询结果列 -->
+    <!-- 通用查询结果 -->
     <sql id="Base_Column_List">
 <column.key.txt><column.nokey.txt>
     </sql>
-
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+<mapper-criteria.txt>
+    </sql>
 
 </mapper>

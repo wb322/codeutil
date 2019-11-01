@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import [package].entity.[Table2];
-import [package].service.[Table2]Service;
+import [package].service.I[Table2]Service;
 import [package].commons.resp.*;
 /**
  * [comment]控制器层
@@ -19,7 +19,7 @@ import [package].commons.resp.*;
 public class [Table2]Controller extends BaseController{
 
 	@Autowired
-	private [Table2]Service [table2]Service;
+	private I[Table2]Service [table2]Service;
 
 	/**
 	 * 查询全部数据

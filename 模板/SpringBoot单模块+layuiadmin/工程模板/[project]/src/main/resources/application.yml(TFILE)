@@ -15,7 +15,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: false #表与实体类字段驼峰映射
+    map-underscore-to-camel-case: true #表的列属性与实体类字段驼峰映射
   global-config:
     banner: true
     db-config:
