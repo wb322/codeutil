@@ -9,7 +9,7 @@
 	<type key="DOUBLE" value="Double"></type>
 	<type key="TEXT" value="String"></type>
 	<type key="BIT" value="Boolean"></type>
-	<type key="TINYINT" value="Byte"></type>
+	<type key="TINYINT" value="Integer"></type>
 	<type key="CHAR" value="String"></type>
 	<type key="TIME" value="java.util.Date"></type>
 	<type key="TIMESTAMP" value="java.util.Date"></type>
