@@ -30,7 +30,7 @@ public class LogAspect extends BaseController {
     /**
      * 切点
      */
-    @Pointcut(value = "execution(public * com.task.poc.controller..*.*(..))")
+    @Pointcut(value = "execution(public * [package].controller..*.*(..))")
     public void pointcut() {
 
     }
