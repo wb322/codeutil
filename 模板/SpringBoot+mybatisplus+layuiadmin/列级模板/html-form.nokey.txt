@@ -1,0 +1,6 @@
+    <div class="layui-form-item">
+      <label class="layui-form-label">[columnComment]</label>
+      <div class="layui-input-block">
+        <input type="text" name="[column2]" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>

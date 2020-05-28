@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+  <title>[comment]</title>
+  <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+  <div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+<html-form.key.txt>
+<html-form.nokey.txt>
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+      <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+  </div>
+  </div>
+</body>
+<script>
+  layui.use(['form'],function () {
+    var $ = layui.$,
+        form = layui.form;
+  });
+</script>
+</html>

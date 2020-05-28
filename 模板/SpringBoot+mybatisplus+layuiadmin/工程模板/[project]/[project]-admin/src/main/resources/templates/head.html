@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+
+    <!--复制到目标页面-->
+    <th:block th:replace="head::jsCss"></th:block>
+    <!--通用js和css-->
+    <th:block th:fragment="jsCss">
+        <meta charset="UTF-8">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+        <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" media="all">
+        <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" media="all">
+
+
+        <script th:src="@{/layuiadmin/layui/layui.js}"></script>
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/myfun.js}"></script>
+
+    </th:block>
+
+    <!--添加编辑页面-->
+    <th:block th:fragment="css">
+        <meta charset="UTF-8">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+        <link rel="stylesheet" th:href="@{/layuiadmin/layui/css/layui.css}" media="all">
+        <link rel="stylesheet" th:href="@{/layuiadmin/style/admin.css}" media="all">
+    </th:block>
+
+
+
+</head>
+</html>

@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * @author wubo
+ * @author [author]
  */
 public class Criteria<T>{
     /**
