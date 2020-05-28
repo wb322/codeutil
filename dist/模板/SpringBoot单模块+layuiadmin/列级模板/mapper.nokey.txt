@@ -1,1 +1,0 @@
-		<result column="[column]" property="[column2]" />

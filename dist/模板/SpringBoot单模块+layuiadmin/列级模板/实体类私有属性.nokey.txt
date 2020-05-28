@@ -1,4 +1,0 @@
-	/**
- 	 * [columnComment]
- 	 */
-	private [type] [column2];
