@@ -171,7 +171,6 @@ public class Util {
 				}
 				keys.add(keyname);
 			}
-			System.out.println("信息："+catalog+"   "+schema+"   "+tableName);
 			//获得所有列
 			ResultSet columnrs = metaData.getColumns(catalog, schema, tableName, null);
 			

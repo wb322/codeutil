@@ -5,12 +5,12 @@ layui.define(['table', 'form'], function(exports) {
 	var $ = layui.$,
 		table = layui.table,
 		form = layui.form,
-		moduleUrl = "/[table2]/";
+		moduleUrl = "/[table]/";
 	table.render({
 		elem: '#list-table',
 		url: moduleUrl + 'page',
 		method: 'post',
-		contentType: 'application/json;UTF-8',
+        contentType: 'application/json;UTF-8',
 		toolbar: '#table-toolbar-head',
 		cols: [[
 			{type: 'checkbox',fixed: 'left'}, 
@@ -27,10 +27,21 @@ layui.define(['table', 'form'], function(exports) {
 	//监听搜索
 	form.on('submit(list-table-search)', function(data) {
 		var field = data.field;
+		$.each(field,function (k, v) {
+        	if (v === ""){
+        		delete field[k];
+        	}
+        });
 		table.reload('list-table', {
 			where: {
 				params: field
-			}
+			},
+			page:{
+			    curr: 1
+			},
+			done:function (res,curr,count) {
+            	this.where = {};
+            }
 		});
 		return false;
 	});
@@ -46,7 +57,7 @@ layui.define(['table', 'form'], function(exports) {
 			layer.open({
 				type: 2,
 				title: '添加',
-				content: '/menu/[table2]/form',
+				content: moduleUrl + 'form',
 				maxmin: true,
 				area: ['550px', '550px'],
 				btn: ['确定', '取消'],
@@ -102,7 +113,7 @@ layui.define(['table', 'form'], function(exports) {
 			layer.open({
 				type: 2,
 				title: '编辑',
-				content: '/menu/[table2]/form',
+				content: moduleUrl + 'form',
 				maxmin: true,
 				area: ['550px', '550px'],
 				btn: ['确定', '取消'],
@@ -139,5 +150,5 @@ layui.define(['table', 'form'], function(exports) {
 			});
 		}
 	});
-	exports('[table2]', {})
+	exports('custom-[table2]', {})
 });

@@ -36,10 +36,12 @@ public class CommonController {
     /**
      * 通用跳转方法
      */
-    @GetMapping(value = {"/menu/{module}/{view}","/menu/{module}/{view}/{queryId}"})
+    @GetMapping(value = {"/menu/{module}/{view}","/menu/{module}/{view}/{key}"})
     public ModelAndView redirect(@PathVariable String module, @PathVariable String view, @PathVariable(required = false) Object key){
         ModelAndView modelAndView = new ModelAndView (module + "/" + view);
-        modelAndView.addObject ("key",key);
+        if (key != null){
+            modelAndView.addObject ("key",key);
+        }
         return modelAndView;
     }
 }

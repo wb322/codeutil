@@ -7,6 +7,7 @@
 package ui;
 
 import database.Util;
+import templet.Utils;
 
 import javax.swing.*;
 import java.io.File;
@@ -45,6 +46,9 @@ public class DatabaseUtil extends javax.swing.JFrame {
 		jComboBox6 = new javax.swing.JComboBox();
 		jLabel6 = new JLabel();
 
+		jComboBox7 = new javax.swing.JComboBox();
+		jLabel7 = new JLabel();
+
 		//setTitle("\u4f20\u667a\u5218\u5907\u4ee3\u7801\u751f\u6210\u56682.3");
 		setTitle("\u4ee3\u7801\u751f\u6210\u5668");
 		setBackground(new java.awt.Color(204, 255, 204));
@@ -74,8 +78,11 @@ public class DatabaseUtil extends javax.swing.JFrame {
 		jLabel4.setText("\u6570\u636e\u5e93");
 
 		jLabel6.setText ("\u662f\u5426\u8986\u76d6\u5df2\u5b58\u5728\u6587\u4ef6");
+		jLabel7.setText ("\u662f\u5426\u6392\u9664\u524d\u7f00");
 
 		jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(
+				new String[] { "true" ,"false"}));
+		jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(
 				new String[] { "true" ,"false"}));
 		jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(
 				new String[] { "--请选择数据库--" }));
@@ -116,6 +123,7 @@ public class DatabaseUtil extends javax.swing.JFrame {
 												.addComponent(jLabel2)
 												.addComponent(jLabel4)
 												.addComponent(jLabel6)
+												.addComponent(jLabel7)
 												.addComponent(jButton1))
 								.addGroup(
 										layout.createParallelGroup(
@@ -137,6 +145,12 @@ public class DatabaseUtil extends javax.swing.JFrame {
 																.addGroup(
 																		layout.createParallelGroup(
 																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jComboBox7,
+																						javax.swing.GroupLayout.Alignment.TRAILING,
+																						0,
+																						174,
+																						Short.MAX_VALUE)
 																				.addComponent(
 																						jComboBox6,
 																						javax.swing.GroupLayout.Alignment.TRAILING,
@@ -241,6 +255,16 @@ public class DatabaseUtil extends javax.swing.JFrame {
 								.addGap(11, 11, 11)
 								.addGroup(
 										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(jLabel7)
+												.addComponent(
+														jComboBox7,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addGap(11, 11, 11)
+								.addGroup(
+										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.BASELINE)
 												.addComponent(jButton1)
 												.addComponent(jButton2))
@@ -253,13 +277,11 @@ public class DatabaseUtil extends javax.swing.JFrame {
 	private void formWindowClosing(java.awt.event.WindowEvent evt) {
 		dispose();
 		System.exit(0);
-		System.out.println("释放");
 	}
 
 	private void formWindowClosed(java.awt.event.WindowEvent evt) {
 		dispose();
 		System.exit(0);
-		System.out.println("释放");
 	}
 
 	
@@ -335,6 +357,13 @@ public class DatabaseUtil extends javax.swing.JFrame {
 			} catch (Exception e) {
 			}
 			propertyMap.put("isOverride", isOverride);
+
+			String isPrefix = null;
+			try {
+				isPrefix = this.jComboBox7.getSelectedItem().toString();
+			} catch (Exception e) {
+			}
+			Utils.isPrefix = Boolean.valueOf(isPrefix);
 
 			final Thread t=new Thread(new Runnable(){
 				  public void run(){
@@ -452,12 +481,14 @@ public class DatabaseUtil extends javax.swing.JFrame {
 	private javax.swing.JComboBox<String> jComboBox1;
 	private javax.swing.JComboBox jComboBox2;
 	private javax.swing.JComboBox jComboBox6;
+	private javax.swing.JComboBox jComboBox7;
 	private JLabel jLabel1;
 	private JLabel jLabel2;
 	private JLabel jLabel3;
 	private JLabel jLabel4;
 	private JLabel jLabel5;
 	private JLabel jLabel6;
+	private JLabel jLabel7;
 	private javax.swing.JTextField jTextField1;
 	private javax.swing.JTextField jTextField2;
 	private javax.swing.JTextField jTextField3;

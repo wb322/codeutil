@@ -41,8 +41,7 @@ public class Code {
 		//循环所有模板
 		for(Templet t:list  )
 		{
-			System.out.println("处理模板："+ t.getPath()+"   --- "+t.getFileName());
-			
+
 			//如果是模板类文件			
 			if( FileUtil.isTemplatFile( t.getAllPath()) ){
 			
@@ -51,7 +50,6 @@ public class Code {
 				
 				//替换表级模板部分
 				if (t.getAllPath ().contains ("templates" + File.separator + "index.html")){
-					System.out.println (111);
 				}
 				content= ClientTempletUtil.createContentForTable(content, tableTempletMap, tableList);
 				

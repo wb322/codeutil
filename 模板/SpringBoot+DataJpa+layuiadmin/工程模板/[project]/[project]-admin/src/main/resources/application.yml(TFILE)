@@ -1,0 +1,27 @@
+server: 
+  port: 8080
+spring: 
+  application:  
+    name: [project] #指定服务名
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver #[driverName]
+    url: [url]&useSSL=false&serverTimezone=UTC
+    username: [dbuser]
+    password: [dbpassword]
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true  #格式化sql语句
+      open-in-view: true
+
+#日志
+logging:
+  config: classpath:log/log4j2_dev.xml

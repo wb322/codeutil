@@ -140,7 +140,6 @@ public class ClientTempletUtil {
 					//根据模板生成新内容					
 					if(b)
 					{
-						System.out.println("替换符号内容："+foreachContent);
 						String newContent= foreachContent.replace("[column]", column.getColumnName());
 						newContent=newContent.replace("[Column]", Utils.getClassName(column.getColumnName()) );
 						
@@ -154,7 +153,6 @@ public class ClientTempletUtil {
 						}
 						newContent= newContent.replace("[columnComment]", column.getColumnComment());//备注
 						createContent.append(newContent);
-						System.out.println("替换后内容："+newContent);
 					}
 				}
 				oldContent=oldContent.replace(thf, createContent.toString());//替换主体内容

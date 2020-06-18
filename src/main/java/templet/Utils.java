@@ -5,6 +5,8 @@ package templet;
  *
  */
 public class Utils {
+
+	public static Boolean isPrefix = true;
 		
 	/**
 	 * 首字母大写
@@ -22,15 +24,19 @@ public class Utils {
 	 * @return
 	 */
 	public static String getTableName2(String tableName){
-		
-		tableName=tableName.toLowerCase();//全部转换为小写
-		int index = tableName.indexOf("_");//下划线的位置
-		if(index==-1){
-			return tableName;
-		}		
-		String name= tableName.substring(index+1);//从下划线开始截取
-		
-		return getColumnName2(name);//去掉下划线
+		if (isPrefix){
+			tableName=tableName.toLowerCase();//全部转换为小写
+			int index = tableName.indexOf("_");//下划线的位置
+			if(index==-1){
+				return tableName;
+			}
+			String name= tableName.substring(index+1);//从下划线开始截取
+
+			return getColumnName2(name);//去掉下划线
+		}else{
+			tableName=tableName.toLowerCase();//全部转换为小写
+			return getColumnName2(tableName);
+		}
 	}
 	
 	
@@ -44,7 +50,6 @@ public class Utils {
 		while(true){
 			
 			int i=name.indexOf("_");//取下划线
-			System.out.println("i="+i);
 			if(i==-1){
 				break;//跳出
 			}
