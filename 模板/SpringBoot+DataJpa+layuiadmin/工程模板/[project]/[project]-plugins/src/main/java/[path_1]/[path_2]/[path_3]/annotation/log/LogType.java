@@ -58,4 +58,9 @@ public enum LogType {
      * 清空数据
      */
     CLEAN,
+
+    /**
+     * 鉴权
+     */
+    VALIDATE,
 }

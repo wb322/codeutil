@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
+import [package].resp.Result;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -64,9 +64,10 @@ public class LogAspect {
             HttpServletRequest request = attributes.getRequest();
             String ip = getRequestIp(request);
             optLog.setIp(ip);
-            //请求url
-            String url = request.getRequestURI();
-            optLog.setUrl(url);
+            //请求地址
+            String localAddr = request.getLocalAddr();
+            String uri = request.getRequestURI();
+            optLog.setUrl(localAddr + uri);
             //请求方法
             String requestMethod = request.getMethod();
             optLog.setHttpMethod(requestMethod);
@@ -74,7 +75,14 @@ public class LogAspect {
             String args = joinPoint.getArgs().toString();
             optLog.setParams(args);
             //返回参数
-            optLog.setResult(result.toString());
+            if (result != null && result instanceof Result){
+                //返回参数
+                Result r = (Result)result;
+                String codeTag = Result.CODE_TAG;
+                Object o = r.get(codeTag);
+                optLog.setResult(Result.CODE_TAG + ": " + o);
+                optLog.setStatus(0);
+            }
             if (e != null) {
                 //操作状态（0正常 1异常）
                 optLog.setStatus(1);

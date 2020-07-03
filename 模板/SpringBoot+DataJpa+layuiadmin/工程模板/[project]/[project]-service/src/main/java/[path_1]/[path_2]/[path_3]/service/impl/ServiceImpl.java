@@ -65,6 +65,11 @@ public class ServiceImpl<T,ID extends Serializable,R extends BaseDao> implements
     }
 
     @Override
+    public Boolean exist(T t){
+        return getDao().exists(Example.of(t));
+    }
+
+    @Override
     public void save(T t) {
         dao.save(t);
     }

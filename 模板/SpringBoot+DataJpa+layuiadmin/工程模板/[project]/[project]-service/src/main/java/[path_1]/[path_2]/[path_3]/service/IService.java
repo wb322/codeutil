@@ -31,6 +31,11 @@ public interface IService<T,ID extends Serializable>{
     Page<T> findPageByCriteria(Criteria<T> criteria);
 
     /**
+     * 判断实体是否存在
+     */
+    Boolean exist(T t);
+
+    /**
      * 添加
      */
     void save(T t);
