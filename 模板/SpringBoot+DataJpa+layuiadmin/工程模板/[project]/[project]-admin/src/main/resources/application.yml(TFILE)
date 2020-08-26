@@ -5,7 +5,7 @@ spring:
     name: [project] #指定服务名
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver #[driverName]
-    url: [url]&useSSL=false&serverTimezone=UTC
+    url: [url]&useSSL=false&serverTimezone=GMT%2B8
     username: [dbuser]
     password: [dbpassword]
   thymeleaf:
@@ -15,6 +15,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+      #naming:
+        #physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl#不使用驼峰命名
     database: mysql
     show-sql: true
     properties:

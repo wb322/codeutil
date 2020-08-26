@@ -89,7 +89,7 @@ public class Code {
 						
 						//全局替换符嵌套替换符处理********
 						
-						System.out.println("全局替换符嵌套替换符处理********"+table.getName());
+						//System.out.println("全局替换符嵌套替换符处理********"+table.getName());
 						/*for(String k:publicMap.keySet() ){
 							String value = publicMap.get(k).replace("[table]", table.getName());
 							publicMap.put(k,value );							

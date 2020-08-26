@@ -62,7 +62,7 @@ public class FileUtil {
 				if (isOverride != null && "true".equals (isOverride)){
 					f.delete();
 				}else{
-					System.out.println ("跳过"+f.getAbsolutePath ());
+					//System.out.println ("跳过"+f.getAbsolutePath ());
 					return;
 				}
 			}
@@ -83,7 +83,7 @@ public class FileUtil {
 			
 			//output.write(content);
 			//output.close();
-			System.out.println("生成代码：" + filePath);
+			System.out.println("生成代码" + filePath);
 
 		} catch (Exception e) {
 			e.printStackTrace();

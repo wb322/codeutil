@@ -10,11 +10,4 @@
     <groupId>[path_1].[path_2].[path_3]</groupId>
     <artifactId>[project]-common</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-	</dependencies>
-
 </project>

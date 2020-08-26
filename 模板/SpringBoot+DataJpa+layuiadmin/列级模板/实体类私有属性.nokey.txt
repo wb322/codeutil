@@ -1,2 +1,3 @@
 	/*** [columnComment] */
+	@Column(name = "[column]")
 	private [type] [column2];

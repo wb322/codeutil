@@ -46,7 +46,7 @@ public class BaseController<T, ID extends Serializable,SERVICE extends IService<
      */
     @Log(module = "基础功能",type = LogType.SELECT)
     @PostMapping(value = "/criteria")
-    public Result findByCriteria(Criteria<T> criteria) {
+    public Result findByCriteria(@RequestBody Criteria<T> criteria) {
         return Result.success(iService.findByCriteria(criteria));
     }
 

@@ -80,9 +80,9 @@ public class ServiceImpl<T,ID extends Serializable,R extends BaseDao> implements
     /** 根据ID更新,只能有一个ID,无则更新全部 */
     @Override
     public void update(T t) {
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        Class<?> c = t.getClass();
-        CriteriaUpdate update = criteriaBuilder.createCriteriaUpdate(c);
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        Class<T> c = (Class<T>)t.getClass();
+        CriteriaUpdate<T> update = cb.createCriteriaUpdate(c);
         Root root = update.from(c);
         EntityType model = root.getModel();
         String idName = model.getId(getIDClass()).getName();
@@ -93,7 +93,7 @@ public class ServiceImpl<T,ID extends Serializable,R extends BaseDao> implements
             String key = entry.getKey();
             Object value = entry.getValue();
             if (StrUtil.isNotEmpty(idName) && idName.equals(key)){
-                update.where(criteriaBuilder.equal(root.get(key), value));
+                update.where(cb.equal(root.get(key), value));
             }else{
                 update.set(key,value);
             }
@@ -102,9 +102,27 @@ public class ServiceImpl<T,ID extends Serializable,R extends BaseDao> implements
         query.executeUpdate();
     }
 
+    /** 根据属性删除,原生的需要有ID属性,所以自己实现 */
     @Override
-    public void deleteByCriteria(T t) {
-        dao.delete(t);
+    public Integer deleteByCriteria(T t) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        Class<T> c = (Class<T>)t.getClass();
+        CriteriaDelete<T> delete = cb.createCriteriaDelete(c);
+        Root<T> root = delete.from(c);
+        Map map = new HashMap();
+        BeanUtil.beanToMap(t, map, false, true);
+        Set<Map.Entry<String, Object>> set = map.entrySet();
+        List<Predicate> predicateList = new ArrayList<Predicate>();
+        for (Map.Entry<String, Object> entry : set) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            predicateList.add(cb.equal(root.get(key),value));
+        }
+        Predicate[] p = new Predicate[predicateList.size()];
+        delete.where(cb.and(predicateList.toArray(p)));
+        Query query = em.createQuery(delete);
+        int i = query.executeUpdate();
+        return i;
     }
 
     @Override

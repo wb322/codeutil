@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/[table2]")
-public class [Table2]Controller extends BaseController<[Table2],[keyType]>{
-
-	@Autowired
-	private I[Table2]Service [table2]Service;
+@RequestMapping("/[table]")
+public class [Table2]Controller extends BaseController<[Table2],[[keyType]],I[Table2]Service>{
 
 }

@@ -23,6 +23,8 @@ layui.define(['table', 'form'], function(exports) {
 		text: {
 			none: '无相关数据'
 		},
+		size:'lg',
+
 	});
 	//监听搜索
 	form.on('submit(list-table-search)', function(data) {
@@ -102,7 +104,7 @@ layui.define(['table', 'form'], function(exports) {
 		var data = obj.data;
 		if (obj.event === 'del') {
 			layer.confirm('确定删除吗？', function(index) {
-				wb.delete(moduleUrl + data. [key2], null, function(d) {
+				wb.delete(moduleUrl + data.[key2], null, function(d) {
 					var t = wb.alert(d);
 					if (t.f) {
 						table.reload('list-table');
@@ -150,5 +152,19 @@ layui.define(['table', 'form'], function(exports) {
 			});
 		}
 	});
+
+
+	//自定义事件
+    var active = {
+        demo: function(){
+
+        },
+
+    };
+    //点击后触发data-method事件,
+    $('.layui-btn').on('click', function(){
+        let field = $(this), method = field.data('method');
+        active[method] ? active[method].call(this, field) : '';
+    });
 	exports('custom-[table2]', {})
 });

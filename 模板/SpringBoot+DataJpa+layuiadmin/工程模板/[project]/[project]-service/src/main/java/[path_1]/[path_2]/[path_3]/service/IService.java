@@ -48,7 +48,7 @@ public interface IService<T,ID extends Serializable>{
     /**
      * @param t
      */
-    void deleteByCriteria(T t);
+    Integer deleteByCriteria(T t);
 
     /**
      * 根据主键删除

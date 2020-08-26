@@ -17,6 +17,6 @@ public class BaseExceptionHandler {
     @ResponseBody
     public Result error(Exception e){
         e.printStackTrace();
-        return Result.body (ResultEnum.BASE_ERROR);
+        return Result.error (e.getMessage());
     }
 }
