@@ -155,7 +155,8 @@ public class FileUtil {
 			String basePath = new File("").getAbsolutePath() + File.separatorChar + "db";
 			Map<String, String> map = DatabaseXml.readProperty (basePath);
 			String isOverride = map.get ("isOverride");
-			if (isOverride == null || "false".equals (isOverride)){
+			File newpath=new File(newPath);
+			if (newpath.exists() && "false".equals (isOverride)){
 				return;
 			}
 			int bytesum = 0;
@@ -164,7 +165,6 @@ public class FileUtil {
 			if (oldfile.exists()) { // 文件存在时
 				
 				//创建新的文件的文件夹
-				File newpath=new File(newPath);
 				if(!newpath.getParentFile().exists())
 				{
 					newpath.getParentFile().mkdirs();
@@ -179,6 +179,7 @@ public class FileUtil {
 					fs.write(buffer, 0, byteread);
 				}
 				inStream.close();
+				System.out.println("复制文件:" + newPath);
 			}
 		} catch (Exception e) {
 			System.out.println("复制单个文件操作出错!原文件:"+oldPath+" 新文件："+newPath);

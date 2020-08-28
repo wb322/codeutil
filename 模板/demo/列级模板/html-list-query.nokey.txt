@@ -1,0 +1,3 @@
+                    <div class="layui-inline layui-show-xs-block">
+                        <input type="text" name="[column2]" placeholder="[columnComment]" autocomplete="off" class="layui-input">
+                    </div>

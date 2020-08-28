@@ -74,12 +74,18 @@ public class LogAspect {
             String args = joinPoint.getArgs().toString();
             optLog.setParams(args);
             //返回参数
-            optLog.setResult(result.toString());
+            if (result != null){
+                optLog.setResult(result.toString());
+            }
             if (e != null) {
                 //操作状态（0正常 1异常）
                 optLog.setStatus(1);
                 //错误消息
-                optLog.setErrorMsg(e.getMessage().substring(0, 2000));
+                String message = e.getMessage();
+                if (message != null && message.length() > 500){
+                    message = message.substring(0, 500);
+                }
+                optLog.setErrorMsg(message);
             }
             System.out.println(optLog);
         } catch (Exception exception) {

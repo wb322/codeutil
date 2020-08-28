@@ -24,11 +24,11 @@
     <!--版本管理-->
     <properties>
         <project.version>1.0-SNAPSHOT</project.version>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <mybatis.plus>3.2.0</mybatis.plus>
         <swagger2>2.8.0</swagger2>
         <swagger.ui>2.8.0</swagger.ui>
-        <hutool>5.3.3</hutool>
+        <hutool>5.4.0</hutool>
     </properties>
 
     <!--依赖管理-->

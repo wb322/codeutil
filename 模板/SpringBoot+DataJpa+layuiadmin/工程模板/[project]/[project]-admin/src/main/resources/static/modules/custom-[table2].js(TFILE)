@@ -23,7 +23,7 @@ layui.define(['table', 'form'], function(exports) {
 		text: {
 			none: '无相关数据'
 		},
-		size:'lg',
+		//size:'lg',
 
 	});
 	//监听搜索

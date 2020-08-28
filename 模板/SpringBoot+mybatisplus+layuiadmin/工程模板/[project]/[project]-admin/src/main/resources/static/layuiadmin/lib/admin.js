@@ -27,7 +27,7 @@ layui.define('view', function(exports){
 
   //通用方法
   ,admin = {
-    v: '1.2.1 std'
+    v: '1.4.0 std'
     
     //数据的异步请求
     ,req: view.req
@@ -600,6 +600,54 @@ layui.define('view', function(exports){
       admin.sideFlexible();
     }
     
+    //检查更新
+    ,update: function(){
+      $.ajax({
+        type: 'get',
+        dataType: 'jsonp',
+        data: {
+          name: 'layuiAdmin'
+          ,version: admin.v
+        },
+        url: 'https://fly.layui.com/api/product_update/',
+        success: function(res){
+          if(res.status === 0) {
+            if(res.version === admin.v.replace(/\s|pro|std/g, '')){
+              layer.alert('当前版本已经是最新版本');
+            } else {
+              layer.alert('检查到更新，是否前往下载？', {
+                btn: ['更新', '暂不']
+              }, function(index){
+                layer.close(index);
+                layer.open({
+                  type: 2
+                  ,content: 'https://fly.layui.com/user/product/'
+                  ,area: ['100%', '100%']
+                  ,title: '检查更新'
+                });
+              });
+            }
+          } else if(res.status == 1){
+            layer.alert(res.msg, {
+              btn: ['登入', '暂不']
+            }, function(index){
+              layer.close(index);
+              layer.open({
+                type: 2
+                ,content: 'https://fly.layui.com/user/login/'
+                ,area: ['100%', '100%']
+                ,title: '检查更新'
+              });
+            });
+          } else {
+            layer.msg(res.msg || res.code, {shift: 6});
+          }
+        }, error: function(e){
+          layer.msg('请求异常，请重试', {shift: 6});
+        }
+      });
+    }
+    
     //呼出IM 示例
     ,im: function(){
       admin.popup({
@@ -783,6 +831,11 @@ layui.define('view', function(exports){
     //执行跳转
     var topLayui = parent === self ? layui : top.layui;
     topLayui.index.openTabsPage(href, text || othis.text());
+    
+    //如果为当前页，则执行刷新
+    if(href === admin.tabsBody(admin.tabsPage.index).find('iframe').attr('src')){
+      admin.events.refresh();
+    }
   });
   
   //点击事件

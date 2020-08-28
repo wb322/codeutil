@@ -44,7 +44,7 @@
         var ajaxConfig = {
             type:type,
             url:url,
-            data:JSON.stringify(data),
+            data:data == null ? null:JSON.stringify(data),
             dataType:"JSON",
             timeout:20000,
             contentType:"application/json;utf-8",
@@ -151,6 +151,50 @@
      */
     wb.prototype.father_reload = function() {
         parent.location.reload();
+    };
+    /**
+     * 对Date的扩展，将 Date 转化为指定格式的String
+     * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+     * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+     */
+    Date.prototype.Format = function(fmt) {
+        var o = {
+            "M+" : this.getMonth()+1,                 //月份
+            "d+" : this.getDate(),                    //日
+            "H+" : this.getHours(),                   //小时
+            "m+" : this.getMinutes(),                 //分
+            "s+" : this.getSeconds(),                 //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S"  : this.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt))
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(var k in o)
+            if(new RegExp("("+ k +")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        return fmt;
+    };
+
+    /**
+     * 获取日期区间
+     * @param start 在Date的基础上从哪天开始操作,0代表当前Date对象
+     * @param total 加减几天,如果不需要结束时间则为0,正数为以后时间,负数为过去的时间
+     */
+    Date.prototype.getRangeDate = function(start,total){
+        let dayOfMonth = this.getDate();
+        let startDay = this.setDate(dayOfMonth + start);
+        let startDayStr = new Date(startDay).format("yyyy-MM-dd");
+        let baseDay = this.setDate(dayOfMonth + start + total);
+        let baseDayStr = new Date(baseDay).format("yyyy-MM-dd");
+        if (total != 0){
+            if (total >0){
+                return {start:startDayStr,end:baseDayStr};
+            }else{
+                return {start:baseDayStr,end:startDayStr};
+            }
+        }else{
+            return {start:startDayStr,end:startDayStr};
+        }
     };
 
     win.wb = new wb();
