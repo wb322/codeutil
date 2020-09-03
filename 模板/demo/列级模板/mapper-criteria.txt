@@ -1,1 +1,0 @@
-        <if test="[column2] != null and [column2] != ''" > AND [column] = #{[column2]}</if>
