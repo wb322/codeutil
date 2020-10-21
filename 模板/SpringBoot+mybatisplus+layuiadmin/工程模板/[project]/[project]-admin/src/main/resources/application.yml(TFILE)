@@ -17,7 +17,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true #表的列属性与实体类字段驼峰映射
   global-config:
-    banner: true
+    banner: false
     db-config:
       id-type: auto
       #table-prefix:  #表前缀
@@ -29,3 +29,8 @@ mybatis-plus:
 #日志
 logging:
   config: classpath:log/log4j2_dev.xml
+
+#插件
+plugin:
+  log:
+    save: false

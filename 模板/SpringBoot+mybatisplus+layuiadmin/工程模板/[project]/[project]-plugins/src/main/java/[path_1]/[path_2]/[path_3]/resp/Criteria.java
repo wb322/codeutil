@@ -65,4 +65,10 @@ public class Criteria<T>{
     public void setParams(T params) {
         this.params = params;
     }
+
+    public Criteria() {}
+
+    public Criteria(T params) {
+        this.params = params;
+    }
 }

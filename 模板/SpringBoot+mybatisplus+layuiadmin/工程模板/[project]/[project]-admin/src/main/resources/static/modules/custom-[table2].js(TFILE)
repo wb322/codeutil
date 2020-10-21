@@ -5,7 +5,7 @@ layui.define(['table', 'form'], function(exports) {
 	var $ = layui.$,
 		table = layui.table,
 		form = layui.form,
-		moduleUrl = "/[table2]/";
+		moduleUrl = "/[table]/";
 	table.render({
 		elem: '#list-table',
 		url: moduleUrl + 'page',
