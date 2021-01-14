@@ -1,10 +1,8 @@
 package [package].tools;
 
 
-import java.io.RandomAccessFile;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
 
 public class MD5Utils {
 	/**
@@ -52,13 +50,4 @@ public class MD5Utils {
 		return "";
 	}
 
-
-    public static void main(String[] args) throws Exception{
-		RandomAccessFile raf = new RandomAccessFile("C:\\Users\\20688\\Desktop\\DomainMapper.xml","rw");
-		while (raf.read() != -1){
-			String s = raf.readLine();
-			System.out.println(s);
-		}
-		raf.close();
-	}
 }

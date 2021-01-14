@@ -5,10 +5,10 @@ import jx.bf.wb.resp.Result;
 import [package].service.ISysLogService;
 import [package].tools.JsonUtil;
 import [package].tools.ToolUtils;
+import [package].config.CustomConfig;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.springframework.beans.factory.annotation.Value;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 public class LogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
-
-    @Value("${plugin.log.save}")
-    private Boolean plugin_log_save;
 
     @Resource
     private ISysLogService sysLogService;
@@ -101,7 +98,7 @@ public class LogAspect {
             }
             String json = JsonUtil.objectToJson(sysLog);
             logger.info(json);
-            if (plugin_log_save){
+            if (CustomConfig.save_log){
                 sysLogService.save(sysLog);
             }
         } catch (Exception exception) {

@@ -5,7 +5,7 @@ spring:
     name: [project] #指定服务名
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver #[driverName]
-    url: [url]&useSSL=false&serverTimezone=UTC
+    url: [url]&useSSL=false&serverTimezone=GMT%2B8
     username: [dbuser]
     password: [dbpassword]
   thymeleaf:
@@ -19,18 +19,18 @@ mybatis-plus:
   global-config:
     banner: false
     db-config:
-      id-type: auto
+      id-type: assign_id
       #table-prefix:  #表前缀
       select-strategy: not_empty
       insert-strategy: not_empty
       update-strategy: not_empty
-  mapper-locations: classpath:mapper/*
+  mapper-locations: classpath*:mapper/*.xml
   check-config-location: true #是否检查 MyBatis XML 文件的存在
 #日志
 logging:
   config: classpath:log/log4j2_dev.xml
 
-#插件
-plugin:
-  log:
-    save: false
+#自定义
+custom:
+  save_log: false
+  security_key: [-113, 104, -42, -22, -68, -39, 59, 67, 79, -119, 39, -61, -118, 63, 106, 14]

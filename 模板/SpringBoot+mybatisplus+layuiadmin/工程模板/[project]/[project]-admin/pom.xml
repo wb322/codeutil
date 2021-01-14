@@ -64,6 +64,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--<configuration>
+                    &lt;!&ndash;生成的jar包位置&ndash;&gt;
+                    <outputDirectory>${project.parent.basedir}/部署/admin</outputDirectory>
+                    <excludes>
+                        <exclude>**/*.yml</exclude>
+                    </excludes>
+                </configuration>-->
             </plugin>
         </plugins>
     </build>

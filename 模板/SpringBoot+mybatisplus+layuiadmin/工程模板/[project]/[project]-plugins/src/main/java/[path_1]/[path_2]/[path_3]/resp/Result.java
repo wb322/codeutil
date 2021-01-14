@@ -68,6 +68,9 @@ public class Result<T> implements Serializable {
     public static Result error(String msg){
         return new Result(HttpStatus.HTTP_INTERNAL_ERROR,msg);
     }
+    public static Result error(int code,String msg){
+        return new Result(code,msg);
+    }
     public static <T> PageResult<T> page(IPage page){
         return new PageResult<T>(page);
     }
