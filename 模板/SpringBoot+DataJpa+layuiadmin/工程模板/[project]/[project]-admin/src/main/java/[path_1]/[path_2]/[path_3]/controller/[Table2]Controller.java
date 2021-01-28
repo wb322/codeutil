@@ -14,5 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("/[table]")
 public class [Table2]Controller extends BaseController<[Table2],[keyType],I[Table2]Service>{
+    
+    @GetMapping("/list")
+    public ModelAndView listPage(){
+        ModelAndView modelAndView = new ModelAndView("[table]/list");
+        return modelAndView;
+    }
+    @GetMapping("/form")
+    public ModelAndView formPage(){
+        ModelAndView modelAndView = new ModelAndView("[table]/form");
+        return modelAndView;
+    }
 
 }

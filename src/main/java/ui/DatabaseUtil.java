@@ -81,9 +81,9 @@ public class DatabaseUtil extends javax.swing.JFrame {
 		jLabel7.setText ("\u662f\u5426\u6392\u9664\u524d\u7f00");
 
 		jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(
-				new String[] { "true" ,"false"}));
+				new String[] { "false" ,"true"}));
 		jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(
-				new String[] { "true" ,"false"}));
+				new String[] { "false" ,"true"}));
 		jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(
 				new String[] { "--请选择数据库--" }));
 
