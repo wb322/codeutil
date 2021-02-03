@@ -1,5 +1,7 @@
 package [package].controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import [package].annotation.log.Log;
 import [package].annotation.log.LogType;
 import [package].resp.*;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RequestMapping("/[table]")
 public class [Table2]Controller extends BaseController<[Table2]>{
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     private I[Table2]Service [table2]Service;

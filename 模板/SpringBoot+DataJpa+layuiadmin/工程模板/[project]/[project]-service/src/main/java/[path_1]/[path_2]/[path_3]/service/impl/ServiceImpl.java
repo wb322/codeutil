@@ -74,6 +74,11 @@ public class ServiceImpl<T,ID extends Serializable,R extends BaseDao> implements
         dao.save(t);
     }
 
+    @Override
+    public void saveAll(List<T> list){
+        dao.saveAll(list);
+    }
+
     @PersistenceContext
     private EntityManager em;
 

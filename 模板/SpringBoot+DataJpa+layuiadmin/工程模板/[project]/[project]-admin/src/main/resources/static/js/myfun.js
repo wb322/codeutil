@@ -177,23 +177,25 @@
 
     /**
      * 获取日期区间
-     * @param start 在Date的基础上从哪天开始操作,0代表当前Date对象
-     * @param total 加减几天,如果不需要结束时间则为0,正数为以后时间,负数为过去的时间
+     *
+     * S:调用时间
+     * @param start 在S的基础上从哪天开始操作,0代表调用的时间当天
+     * @param total 加减几天,默认为1,正数为以后时间,负数为过去的时间
+     * @param format 时间格式化，默认为 yyyy-MM-dd
      */
-    Date.prototype.getRangeDate = function(start,total){
-        let dayOfMonth = this.getDate();
-        let startDay = this.setDate(dayOfMonth + start);
-        let startDayStr = new Date(startDay).format("yyyy-MM-dd");
-        let baseDay = this.setDate(dayOfMonth + start + total);
-        let baseDayStr = new Date(baseDay).format("yyyy-MM-dd");
-        if (total != 0){
-            if (total >0){
-                return {start:startDayStr,end:baseDayStr};
-            }else{
-                return {start:baseDayStr,end:startDayStr};
-            }
+    Date.prototype.getRangeDate = function(start,total,format){
+        total = total === undefined || total === 0 ? 1 : total;
+        format = format === undefined ? "yyyy-MM-dd" : format;
+        let startDay = this.setDate(this.getDate() + start);
+        let startDayStr = new Date(startDay).format(format);
+        var i = total > 0 ? -1 : 1;
+        let baseDay = this.setDate(this.getDate() + total + (total > 0 ? -1 : 1));
+        let baseDayStr = new Date(baseDay).format(format);
+
+        if (total >0){
+            return {start:startDayStr,end:baseDayStr};
         }else{
-            return {start:startDayStr,end:startDayStr};
+            return {start:baseDayStr,end:startDayStr};
         }
     };
 

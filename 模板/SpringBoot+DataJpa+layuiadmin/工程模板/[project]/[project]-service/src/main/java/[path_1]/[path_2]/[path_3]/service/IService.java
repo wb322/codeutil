@@ -41,6 +41,12 @@ public interface IService<T,ID extends Serializable>{
     void save(T t);
 
     /**
+     * 批量插入
+     * @param list
+     */
+    void saveAll(List<T> list);
+
+    /**
      * 根据主键修改
      */
     void update(T t);
@@ -61,4 +67,5 @@ public interface IService<T,ID extends Serializable>{
      * @param ids
      */
     void deleteByIds(List<ID> ids);
+
 }
