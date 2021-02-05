@@ -79,12 +79,23 @@ public class LogAspect {
             String requestMethod = request.getMethod();
             sysLog.setHttpMethod(requestMethod);
             //请求参数
-            String args = JsonUtil.objectToJson(joinPoint.getArgs());
-            sysLog.setParams(args);
-            //响应码
+            Object[] args = joinPoint.getArgs();
+            if (args != null && args.length != 0){
+                List params = new ArrayList();
+                for (Object arg : args) {
+                    if (!(arg instanceof ServletRequest) && !(arg instanceof ServletResponse) && !(arg instanceof MultipartFile)){
+                        params.add(arg);
+                    }
+                }
+                optLog.setParams(JsonUtil.objectToJson(params));
+            }
             if (result != null && result instanceof Result){
+                //返回参数
                 Result r = (Result)result;
-                sysLog.setResult(r.getCode() + "");
+                String msgTag = Result.MSG_TAG;
+                Object o = r.get(msgTag);
+                optLog.setResult(o + "");
+                optLog.setStatus(0);
             }
             if (e != null) {
                 //操作状态（0正常 1异常）
