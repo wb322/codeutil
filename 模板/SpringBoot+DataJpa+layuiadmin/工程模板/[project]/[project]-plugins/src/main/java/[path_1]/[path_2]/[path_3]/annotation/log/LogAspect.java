@@ -72,15 +72,22 @@ public class LogAspect {
             String requestMethod = request.getMethod();
             optLog.setHttpMethod(requestMethod);
             //请求参数
-            String args = joinPoint.getArgs().toString();
-            optLog.setParams(args);
-            //返回参数
+            Object[] args = joinPoint.getArgs();
+            if (args != null && args.length != 0){
+                List params = new ArrayList();
+                for (Object arg : args) {
+                    if (!(arg instanceof ServletRequest) && !(arg instanceof ServletResponse) && !(arg instanceof MultipartFile)){
+                        params.add(arg);
+                    }
+                }
+                optLog.setParams(JsonUtil.objectToJson(params));
+            }
             if (result != null && result instanceof Result){
                 //返回参数
                 Result r = (Result)result;
-                String codeTag = Result.CODE_TAG;
-                Object o = r.get(codeTag);
-                optLog.setResult(Result.CODE_TAG + ": " + o);
+                String msgTag = Result.MSG_TAG;
+                Object o = r.get(msgTag);
+                optLog.setResult(o + "");
                 optLog.setStatus(0);
             }
             if (e != null) {
@@ -93,10 +100,10 @@ public class LogAspect {
                         errorMsg = errorMsg.substring(0, 255);
                     } catch (Exception exception) {
                     }
-                    optLog.setErrorMsg(errorMsg);
+                    optLog.setResult(errorMsg);
                 }
             }
-            System.out.println(optLog);
+            sysLogService.save(optLog);
         } catch (Exception exception) {
             // 记录本地异常日志
             logger.error("==后置通知异常==");
