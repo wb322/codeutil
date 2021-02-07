@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>precacheTaskDetail</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto" style="padding-bottom: 0">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline layui-show-xs-block">
+                        <input type="text" name="precacheId" placeholder="预缓存ID" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-inline layui-show-xs-block">
+                        <input type="text" name="url" placeholder="url" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-inline layui-show-xs-block">
+                        <input type="text" name="status" placeholder="状态" autocomplete="off" class="layui-input">
+                    </div>
+
+                    <div class="layui-inline layui-btn-group layui-anim layui-anim-scaleSpring">
+                        <button class="layui-btn" lay-submit lay-filter="list-table-search" title="查询">
+                            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                        </button>
+                        <button class="layui-btn" lay-submit lay-filter="list-table-reset" title="重置">
+                            <i class="layui-icon layui-icon-refresh-1 layuiadmin-button-btn"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-card-body">
+            <table id="list-table" lay-filter="list-table"></table>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="table-toolbar-head">
+    <button class="layui-btn layui-btn-radius layui-btn-sm layui-anim layui-anim-scaleSpring" lay-event="add">
+        <i class="layui-icon">&#xe608;</i>添加
+    </button>
+    <button class="layui-btn layui-btn-radius layui-btn-sm layui-anim layui-anim-scaleSpring" lay-event="batchDel">
+        <i class="layui-icon">&#xe640;</i>删除
+    </button>
+</script>
+<script type="text/html" id="table-toolbar-column">
+    <a class="layui-btn layui-btn-normal layui-btn-xs layui-anim layui-anim-scaleSpring" lay-event="edit">
+        <i class="layui-icon layui-icon-edit"></i>编辑
+    </a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs layui-anim layui-anim-scaleSpring" lay-event="del">
+        <i class="layui-icon layui-icon-delete"></i>删除
+    </a>
+</script>
+<script>
+    layui.use(['index', 'custom-precacheTaskDetail', 'table']);
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+  <title>machineApp</title>
+  <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+  <div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">设备ID</label>
+      <div class="layui-input-block">
+        <input type="text" name="machineId" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">DPI系统</label>
+      <div class="layui-input-block">
+        <input type="text" name="dpi" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">DPI配置</label>
+      <div class="layui-input-block">
+        <input type="text" name="dpiConfig" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">缓存系统</label>
+      <div class="layui-input-block">
+        <input type="text" name="cache" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">缓存配置</label>
+      <div class="layui-input-block">
+        <input type="text" name="cacheConfig" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">WEB管理</label>
+      <div class="layui-input-block">
+        <input type="text" name="web" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">WEB配置</label>
+      <div class="layui-input-block">
+        <input type="text" name="webConfig" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">负载均衡</label>
+      <div class="layui-input-block">
+        <input type="text" name="gslb" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">负载均衡配置</label>
+      <div class="layui-input-block">
+        <input type="text" name="gslbConfig" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">同步状态</label>
+      <div class="layui-input-block">
+        <input type="text" name="status" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+      <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+  </div>
+  </div>
+</body>
+<script>
+  layui.use(['form'],function () {
+    var $ = layui.$,
+        form = layui.form;
+  });
+</script>
+</html>

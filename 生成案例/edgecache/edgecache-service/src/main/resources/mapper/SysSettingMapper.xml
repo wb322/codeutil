@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.SysSettingMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.SysSetting">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="version" property="version" />
+		<result column="control" property="control" />
+		<result column="license" property="license" />
+		<result column="pack" property="pack" />
+		<result column="cdn" property="cdn" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,name
+		,version
+		,control
+		,license
+		,pack
+		,cdn
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="name != null and name != ''" > AND name = #{name}</if>
+        <if test="version != null and version != ''" > AND version = #{version}</if>
+        <if test="control != null and control != ''" > AND control = #{control}</if>
+        <if test="license != null and license != ''" > AND license = #{license}</if>
+        <if test="pack != null and pack != ''" > AND pack = #{pack}</if>
+        <if test="cdn != null and cdn != ''" > AND cdn = #{cdn}</if>
+
+    </sql>
+
+</mapper>

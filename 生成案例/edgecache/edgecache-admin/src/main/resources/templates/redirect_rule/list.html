@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>redirectRule</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <button id="addBtn" class="layui-btn layui-btn-radius layui-btn-sm" lay-event="add">
+                <i class="layui-icon">&#xe608;</i>添加
+            </button>
+        </div>
+    </div>
+    <div class="layui-tab layui-tab-card">
+        <ul class="layui-tab-title">
+            <li class="layui-this">HTTP规则</li>
+            <li>DNS规则</li>
+        </ul>
+        <div class="layui-tab-content" style="background-color: #FFFFFF">
+            <div class="layui-tab-item layui-show">
+                <table id="list-table" lay-filter="list-table"></table>
+            </div>
+            <div class="layui-tab-item">
+                <table id="list-table2" lay-filter="list-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="table-toolbar-head">
+    <button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="add">
+        <i class="layui-icon">&#xe608;</i>添加
+    </button>
+    <!--<button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="batchDel">
+        <i class="layui-icon">&#xe640;</i>删除
+    </button>-->
+</script>
+<script type="text/html" id="table-toolbar-column">
+    <a class="layui-btn layui-btn-sm" lay-event="edit">
+        <i class="layui-icon layui-icon-edit"></i>编辑
+    </a>
+    <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">
+        <i class="layui-icon layui-icon-delete"></i>删除
+    </a>
+</script>
+<script>
+    layui.use(['index', 'custom-redirectRule', 'table']);
+</script>
+</body>
+</html>

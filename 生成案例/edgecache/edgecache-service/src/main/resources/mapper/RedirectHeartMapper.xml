@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.RedirectHeartMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.RedirectHeart">
+		<id column="id" property="id" />
+		<result column="url" property="url" />
+		<result column="separation" property="separation" />
+		<result column="fail" property="fail" />
+		<result column="recovery" property="recovery" />
+		<result column="enable" property="enable" />
+		<result column="update_time" property="updateTime" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,url
+		,separation
+		,fail
+		,recovery
+		,enable
+		,update_time
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="url != null and url != ''" > AND url = #{url}</if>
+        <if test="separation != null and separation != ''" > AND separation = #{separation}</if>
+        <if test="fail != null and fail != ''" > AND fail = #{fail}</if>
+        <if test="recovery != null and recovery != ''" > AND recovery = #{recovery}</if>
+        <if test="enable != null and enable != ''" > AND enable = #{enable}</if>
+        <if test="updateTime != null and updateTime != ''" > AND update_time = #{updateTime}</if>
+
+    </sql>
+
+</mapper>

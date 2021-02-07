@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>sysSetting</title>
+    <th:block th:replace="head::jsCss"></th:block>
+    <style>
+        .layui-form-label {
+            width: 150px !important;
+        }
+
+        .layui-input-inline {
+            width: 400px !important;
+        }
+    </style>
+</head>
+<body style="padding: 20px">
+<div class="layui-card">
+    <!--<div class="layui-card-header">
+      系统设置
+    </div>-->
+    <div class="layui-form layui-card-body" lay-filter="form-add-edit" id="form-add-edit"
+         style="padding: 20px 30px 0 0;">
+        <input type="hidden" name="id">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">系统名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">系统版本</label>
+            <div class="layui-input-inline">
+                <input type="text" name="version" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">控制中心</label>
+            <div class="layui-input-inline">
+                <input type="text" name="control" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">License有效期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="license" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">系统安装包</label>
+            <div class="layui-input-inline">
+                <input type="text" name="pack" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-hide">
+            <label class="layui-form-label">是否为CDN模式</label>
+            <div class="layui-input-inline">
+                <input type="checkbox" name="cdn" lay-verify="required" lay-skin="switch" lay-text="ON|OFF">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="padding-bottom: 20px!important;">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <!--<input class="layui-btn" type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="增加">-->
+                <input class="layui-btn" type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit"
+                       value="修改">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['index','form'], function () {
+        var $ = layui.$,
+            form = layui.form;
+        moduleUrl = '/sys_setting/';
+        wb.get(moduleUrl + "1", null, function (d) {
+            $.each(d.data, function (k, v) {
+                var att = $("#form-add-edit").find("[name = '" + k + "']")[0];
+                if (att != undefined) {
+                    att.value = v;
+                }
+            });
+        });
+        form.on('submit(form-edit-submit)', function(data){
+            wb.put('/sys_setting',data.field,function (d) {
+                if (d.code == 0){
+                    layer.msg('正在重新加载', {
+                        icon: 16
+                        ,shade: 0.01
+                    });
+                    setTimeout(function () {
+                        parent.location.reload();
+                    },1000);
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</html>

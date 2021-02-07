@@ -1,0 +1,17 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /home/bv/bengine/logs/access.log
+  fields:
+    log_source: test
+  fields_under_root: true
+# ============================== Filebeat modules ==============================
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+# ------------------------------ Logstash Output -------------------------------
+output.logstash:
+  hosts: ["localhost:5044"]

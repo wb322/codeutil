@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.MachineCacheStorageMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.MachineCacheStorage">
+		<id column="id" property="id" />
+		<result column="cache_id" property="cacheId" />
+		<result column="type" property="type" />
+		<result column="path" property="path" />
+		<result column="size" property="size" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,cache_id
+		,type
+		,path
+		,size
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="cacheId != null and cacheId != ''" > AND cache_id = #{cacheId}</if>
+        <if test="type != null and type != ''" > AND type = #{type}</if>
+        <if test="path != null and path != ''" > AND path = #{path}</if>
+        <if test="size != null and size != ''" > AND size = #{size}</if>
+
+    </sql>
+
+</mapper>

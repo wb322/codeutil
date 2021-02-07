@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>ip</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<style>
+    #divContent {
+        height: 50%;
+        overflow: auto;
+    }
+</style>
+<body>
+<div class="layui-fluid">
+    <div class="layui-tab layui-tab-brief layui-card" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">ping</li>
+            <li>路由跟踪</li>
+            <li>页面访问</li>
+        </ul>
+        <div class="layui-tab-content" style="padding: 30px">
+            <!--ping-->
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 150px">IP地址/主机名</label>
+                        <div class="layui-input-inline" style="width: 400px">
+                            <input id="ping_ip" class="layui-input" type="text">
+                        </div>
+                        <div class="layui-input-inline" style="width: 50px">
+                            <input id="btnSwitch" class="layui-btn" type="button" value="Start" onclick="handleBtnClick()"/>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>结果显示:</legend>
+                        </fieldset>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <div class="layui-input-block">
+                            <div id="divContent"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--路由跟踪-->
+            <div class="layui-tab-item">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 150px">IP地址/主机名</label>
+                        <div class="layui-input-inline" style="width: 400px">
+                            <input id="route_ip" class="layui-input" type="text">
+                        </div>
+                        <div class="layui-input-inline" style="width: 50px">
+                            <input class="layui-btn" type="button" data-method="route" value="Start"/>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>结果显示:</legend>
+                        </fieldset>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <div class="layui-input-block">
+                            <div id="route_content"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--页面访问-->
+            <div class="layui-tab-item">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 150px">URL</label>
+                        <div class="layui-input-inline" style="width: 400px">
+                            <input id="curl_ip" class="layui-input" type="text">
+                        </div>
+                        <div class="layui-input-inline" style="width: 50px">
+                            <input class="layui-btn" type="button" value="Start" data-method="curl"/>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>结果显示:</legend>
+                        </fieldset>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <div class="layui-input-block">
+                            <div id="curl_content"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['index','custom-questionDealtool']);
+</script>
+</body>
+</html>
+<script>
+    var intStartTime;
+    var objIMG = new Image();
+    objIMG.onload =
+        objIMG.onerror =
+            function () {
+                /*
+                * 有回应,取消超时计时
+                */
+                clearTimeout(intTimerID);
+                if (!bolIsRunning || bolIsTimeout)
+                    return;
+                var delay = new Date() - intStartTime;
+                println("来自" +
+                    strURL + " 的回复: " +
+                    " time" +
+                    ((delay < 1) ? ("<1") : ("=" + delay)) +
+                    "ms");
+                arrDelays.push(delay);
+                /*
+                * 每次请求间隔限制在1秒以上
+                */
+                setTimeout(ping, delay < 1000 ? (1000 - delay) : 1000);
+            }
+
+    function ping() {
+        /*
+        * 发送请求
+        */
+        intStartTime = +new Date();
+        intSent++;
+        objIMG.src = strURL + "/" + intStartTime;
+        bolIsTimeout = false;
+        /*
+        * 超时计时
+        */
+        intTimerID = setTimeout(timeout, intTimeout);
+    }
+
+    function timeout() {
+        if (!bolIsRunning)
+            return;
+        bolIsTimeout = true;
+        objIMG.src = "X:\\";
+        println("请求超时.");
+        ping();
+    }
+</script>
+<script>
+    var $$ = function (v) {
+        return document.getElementById(v)
+    };
+    var arrDelays = [];
+    var intSent;
+    var bolIsRunning = false;
+    var bolIsTimeout;
+    var strURL;
+    var intTimeout;
+    var intTimerID;
+    var objBtn = $$("btnSwitch");
+    var objContent = $$("divContent");
+    var objTxtURL = $$("ping_ip");
+    objTxtURL.value = window.location.host;
+
+    function handleBtnClick() {
+        if (bolIsRunning) {
+            /*
+            * 停止
+            */
+            var intRecv = arrDelays.length;
+            var intLost = intSent - intRecv;
+            var sum = 0;
+            for (var i = 0; i < intRecv; i++)
+                sum += arrDelays[i];
+            objBtn.value = "Start";
+            bolIsRunning = false;
+            /*
+            * 统计结果
+            */
+            println("　");
+            println(strURL + " 的 Ping 统计数据:");
+            println("　　数据包: 已发送 = " +
+                intSent +
+                ", 已接收 = " +
+                intRecv +
+                ", 丢失 = " +
+                intLost +
+                " (" +
+                Math.floor(intLost / intSent * 100) +
+                "% 丢失),");
+            if (intRecv == 0)
+                return;
+            println("往返行程的估计时间(以毫秒为单位):");
+            println("　　最短 = " +
+                Math.min.apply(this, arrDelays) +
+                "ms, 最长 = " +
+                Math.max.apply(this, arrDelays) +
+                "ms, 平均 = " +
+                Math.floor(sum / intRecv) +
+                "ms");
+        } else {
+            /*
+            * 开始
+            */
+            strURL = objTxtURL.value;
+            if (strURL.length == 0)
+                return;
+            if (strURL.substring(0, 7).toLowerCase() != "http://")
+                strURL = "http://" + strURL;
+            intTimeout = parseInt(2000, 10);
+            if (isNaN(intTimeout))
+                intTimeout = 2000;
+            if (intTimeout < 1000)
+                intTimeout = 1000;
+            objBtn.value = "Stop ";
+            bolIsRunning = true;
+            arrDelays = [];
+            intSent = 0;
+            cls();
+            println("正在 Ping " + strURL + ":");
+            println("　");
+            ping();
+        }
+    }
+
+    function println(str) {
+        var objDIV = document.createElement("div");
+        if (objDIV.innerText != null)
+            objDIV.innerText = str;
+        else
+            objDIV.textContent = str;
+        objContent.appendChild(objDIV);
+        objContent.scrollTop = objContent.scrollHeight;
+    }
+
+    function cls() {
+        objContent.innerHTML = "";
+    }
+</script>

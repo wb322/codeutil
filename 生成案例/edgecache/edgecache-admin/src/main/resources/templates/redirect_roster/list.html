@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>redirectRoster</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto" style="padding-bottom: 0">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline layui-show-xs-block">
+                        <select name="addr" class="layui-select">
+                            <option value="">地址类型</option>
+                            <option value="1">源地址</option>
+                            <option value="2">目标地址</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline layui-show-xs-block">
+                        <select name="type" class="layui-select">
+                            <option value="">名单类型</option>
+                            <option value="1">白名单</option>
+                            <option value="2">黑名单</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline layui-btn-group">
+                        <button class="layui-btn" lay-submit lay-filter="list-table-search" title="查询">
+                            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                        </button>
+                        <button class="layui-btn" lay-submit lay-filter="list-table-reset" title="重置">
+                            <i class="layui-icon layui-icon-refresh-1 layuiadmin-button-btn"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-card-body">
+            <table id="list-table" lay-filter="list-table"></table>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="table-toolbar-head">
+    <button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="add">
+        <i class="layui-icon">&#xe608;</i>添加
+    </button>
+    <!--<button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="batchDel">
+        <i class="layui-icon">&#xe640;</i>删除
+    </button>-->
+</script>
+<script type="text/html" id="table-toolbar-column">
+    <!--<a class="layui-btn layui-btn-sm" lay-event="edit">
+        <i class="layui-icon layui-icon-edit"></i>编辑
+    </a>-->
+    <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">
+        <i class="layui-icon layui-icon-delete"></i>删除
+    </a>
+</script>
+<script>
+    layui.use(['index', 'custom-redirectRoster', 'table']);
+</script>
+</body>
+</html>

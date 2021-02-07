@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>safeSystem</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card layui-tab layui-tab-brief" lay-filter="table-change">
+        <ul class="layui-tab-title">
+            <li class="layui-this">网站设置</li>
+            <li>登录日志</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto" style="padding-bottom: 0">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-inline layui-show-xs-block">
+                                <input type="text" name="networkSegment" placeholder="允许网段" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-inline layui-btn-group">
+                                <button class="layui-btn" lay-submit lay-filter="list-table-search" title="查询">
+                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                </button>
+                                <button class="layui-btn" lay-submit lay-filter="list-table-reset" title="重置">
+                                    <i class="layui-icon layui-icon-refresh-1 layuiadmin-button-btn"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-card-body">
+                    <table id="list-table" lay-filter="list-table"></table>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto" style="padding-bottom: 0">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-inline layui-show-xs-block">
+                                <input type="text" name="ip" placeholder="客户端IP" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-inline layui-show-xs-block">
+                                <input type="text" id="logTime" readonly name="time" placeholder="日期" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-inline layui-show-xs-block">
+                                <select name="status" class="layui-select">
+                                    <option value="">全部</option>
+                                    <option value="0">成功</option>
+                                    <option value="1">失败</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline layui-btn-group">
+                                <button class="layui-btn" lay-submit lay-filter="list-table-search2" title="查询">
+                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                </button>
+                                <button class="layui-btn" lay-submit lay-filter="list-table-reset" title="重置">
+                                    <i class="layui-icon layui-icon-refresh-1 layuiadmin-button-btn"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-card-body">
+                    <table id="list-table2"></table>
+                </div>
+            </div>
+        </div>
+</div>
+<script type="text/html" id="table-toolbar-head">
+    <button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="add">
+        <i class="layui-icon">&#xe608;</i>添加
+    </button>
+    <!--<button class="layui-btn layui-btn-radius layui-btn-sm" lay-event="batchDel">
+        <i class="layui-icon">&#xe640;</i>删除
+    </button>-->
+</script>
+<script type="text/html" id="table-toolbar-column">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">
+        <i class="layui-icon layui-icon-edit"></i>编辑
+    </a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+        <i class="layui-icon layui-icon-delete"></i>删除
+    </a>
+</script>
+<script>
+    layui.use(['index', 'custom-safeSystem', 'table']);
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>contentRefreshTask</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">刷新类型</label>
+        <div class="layui-input-block">
+            <select class="layui-select" name="refreshType">
+                <option value="URL刷新">URL刷新</option>
+                <option value="目录刷新">目录刷新</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">刷新内容</label>
+        <div class="layui-input-block">
+            <textarea class="layui-textarea" name="detail" lay-verify="notBlankLine" rows="13" placeholder="每行一条"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            moduleUrl = "/content_refresh_task/";
+        setTimeout(function () {
+            form.render();
+        },100);
+        form.verify({
+            notBlankLine: function(value, item){ //value：表单的值、item：表单的DOM对象
+
+                if(!(/[\S]+[\n]?[\S]+$/.test(value))){//      |(^([\S]+[\n]?)+(^\S+)&)
+                    return '不能有空白行';
+                }
+
+            }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.WafConfigMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.WafConfig">
+		<id column="id" property="id" />
+		<result column="config_waf_enable" property="configWafEnable" />
+		<result column="config_white_url_check" property="configWhiteUrlCheck" />
+		<result column="config_white_ip_check" property="configWhiteIpCheck" />
+		<result column="config_black_ip_check" property="configBlackIpCheck" />
+		<result column="config_url_check" property="configUrlCheck" />
+		<result column="config_url_args_check" property="configUrlArgsCheck" />
+		<result column="config_user_agent_check" property="configUserAgentCheck" />
+		<result column="config_cookie_check" property="configCookieCheck" />
+		<result column="config_cc_check" property="configCcCheck" />
+		<result column="config_cc_rate" property="configCcRate" />
+		<result column="config_post_check" property="configPostCheck" />
+		<result column="config_waf_model" property="configWafModel" />
+		<result column="config_waf_redirect_url" property="configWafRedirectUrl" />
+		<result column="config_output_html" property="configOutputHtml" />
+		<result column="config_log_dir" property="configLogDir" />
+		<result column="config_rule_dir" property="configRuleDir" />
+		<result column="syncStatus" property="syncStatus" />
+		<result column="version" property="version" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,config_waf_enable
+		,config_white_url_check
+		,config_white_ip_check
+		,config_black_ip_check
+		,config_url_check
+		,config_url_args_check
+		,config_user_agent_check
+		,config_cookie_check
+		,config_cc_check
+		,config_cc_rate
+		,config_post_check
+		,config_waf_model
+		,config_waf_redirect_url
+		,config_output_html
+		,config_log_dir
+		,config_rule_dir
+		,syncStatus
+		,version
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="configWafEnable != null and configWafEnable != ''" > AND config_waf_enable = #{configWafEnable}</if>
+        <if test="configWhiteUrlCheck != null and configWhiteUrlCheck != ''" > AND config_white_url_check = #{configWhiteUrlCheck}</if>
+        <if test="configWhiteIpCheck != null and configWhiteIpCheck != ''" > AND config_white_ip_check = #{configWhiteIpCheck}</if>
+        <if test="configBlackIpCheck != null and configBlackIpCheck != ''" > AND config_black_ip_check = #{configBlackIpCheck}</if>
+        <if test="configUrlCheck != null and configUrlCheck != ''" > AND config_url_check = #{configUrlCheck}</if>
+        <if test="configUrlArgsCheck != null and configUrlArgsCheck != ''" > AND config_url_args_check = #{configUrlArgsCheck}</if>
+        <if test="configUserAgentCheck != null and configUserAgentCheck != ''" > AND config_user_agent_check = #{configUserAgentCheck}</if>
+        <if test="configCookieCheck != null and configCookieCheck != ''" > AND config_cookie_check = #{configCookieCheck}</if>
+        <if test="configCcCheck != null and configCcCheck != ''" > AND config_cc_check = #{configCcCheck}</if>
+        <if test="configCcRate != null and configCcRate != ''" > AND config_cc_rate = #{configCcRate}</if>
+        <if test="configPostCheck != null and configPostCheck != ''" > AND config_post_check = #{configPostCheck}</if>
+        <if test="configWafModel != null and configWafModel != ''" > AND config_waf_model = #{configWafModel}</if>
+        <if test="configWafRedirectUrl != null and configWafRedirectUrl != ''" > AND config_waf_redirect_url = #{configWafRedirectUrl}</if>
+        <if test="configOutputHtml != null and configOutputHtml != ''" > AND config_output_html = #{configOutputHtml}</if>
+        <if test="configLogDir != null and configLogDir != ''" > AND config_log_dir = #{configLogDir}</if>
+        <if test="configRuleDir != null and configRuleDir != ''" > AND config_rule_dir = #{configRuleDir}</if>
+        <if test="syncStatus != null and syncStatus != ''" > AND syncStatus = #{syncStatus}</if>
+        <if test="version != null and version != ''" > AND version = #{version}</if>
+
+    </sql>
+
+</mapper>

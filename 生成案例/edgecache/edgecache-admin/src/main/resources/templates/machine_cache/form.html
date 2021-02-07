@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>machineCache</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label">机器ID</label>
+        <div class="layui-input-block">
+            <input type="text" name="machineId" th:value="${key}" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">服务IP</label>
+        <div class="layui-input-block">
+            <input type="text" name="serverIp" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">服务端口</label>
+        <div class="layui-input-block">
+            <input type="text" name="serverPort" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">存储空间</label>
+        <div class="layui-input-block" >
+            <button class="layui-btn layui-btn-fluid layui-btn-primary" id="storage_btn">
+                <i class="layui-icon layui-icon-add-1"></i>添加存储空间
+            </button>
+        </div>
+    </div>
+    <div id="storage_div"></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">安装目录</label>
+        <div class="layui-input-block">
+            <input type="text" name="installDir" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">安装版本</label>
+        <div class="layui-input-block">
+            <input type="text" name="installVersion" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+            <input type="text" name="status" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label">是否为默认配置</label>
+        <div class="layui-input-block">
+            <input type="text" name="defaultConfig" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <input type="button" class="layui-btn" lay-submit lay-filter="form-add-submit" value="提交">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+<script type="text/html" id="storageTpl">
+    {{#  layui.each(d, function(index, item){ }}
+    {{# if(item != '' ){  }}
+    <div class='layui-form layui-form-item' name="storage-item" style='padding-left: 80px'>
+        <input type='hidden' name="storage_id" class='layui-input' value = '{{ item.id }}'>
+        <label class='layui-form-label layui-col-sm1'>类型</label>
+        <div class='layui-input-inline layui-col-sm3'>
+            <input onchange="storageChange()" type='text' name="type" class='layui-input' value = '{{ item.type }}'>
+        </div>
+        <label class='layui-form-label layui-col-sm1'>位置</label>
+        <div class='layui-input-inline layui-col-sm3'>
+            <input onchange="storageChange()" type='text' name="path" class='layui-input' value='{{ item.path}}'>
+        </div>
+        <label class='layui-form-label layui-col-sm1'>大小</label>
+        <div class='layui-input-inline layui-col-sm3' >
+            <input onchange="storageChange()" type='text' name="size" class='layui-input' value='{{ item.size }}'>
+        </div>
+        <div class='layui-input-inline'>
+            <button class="layui-btn layui-btn-danger" onclick="storageDel(this)">
+                <i class="layui-icon layui-icon-delete"></i>
+            </button>
+        </div>
+    </div>
+    {{# } }}
+    {{#  }); }}
+</script>
+</body>
+<script>
+    layui.use(['index','form'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            laytpl = layui.laytpl,
+            moduleUrl = "/machine_cache/";
+        var oldData;
+        var machineId = $("input[name='machineId']").val();
+        wb.post(moduleUrl+"criteria",{params:{machineId:machineId}},function (d) {
+            if (d.code == 0){
+                oldData = d.data;
+                form.val("form-add-edit",d.data);
+                var getTpl = storageTpl.innerHTML;
+                laytpl(getTpl).render(d.data.machineCacheStorageList, function(html){
+                    $("#storage_div").append(html);
+                });
+            }
+        });
+
+
+        $("#storage_btn").click(function () {
+            var d = [{type:'',path:'',size:''}];
+            var getTpl = storageTpl.innerHTML;
+            laytpl(getTpl).render(d, function(html){
+                $("#storage_div").append(html);
+            });
+        });
+        $("button[name='storage_del']").click(function () {
+            var t = $(this).parent(".layui-form-item");
+            console.info(t);
+            $(t).remove();
+        });
+
+        form.on('submit(form-add-submit)',function (data) {
+            const oldLength = oldData.machineCacheStorageList.length;
+            delete oldData["machineCacheStorageList"];
+            var d = data.field;
+            d.machineCacheStorageList = getStorageList();
+            var default_config = 1;
+            $.each(oldData,function (k,v) {
+                let item = d[k];
+                if (v != item){
+                    default_config = 0;
+                }
+            });
+            if (changed ||d['machineCacheStorageList'].length != oldLength){
+                default_config = 0;
+            }
+            if (default_config == 1){
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                return false;
+            }else{
+                if (oldData.defaultConfig == 1){
+                    delete d["id"];
+                    d.defaultConfig = 0;
+                }
+            }
+            wb.post(moduleUrl,d,function (d) {
+                if (d.code == 0){
+                    layer.alert(d.msg, {icon: 6},function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    });
+                }else{
+                    layer.alert(d.msg, {icon: 5});
+                }
+            })
+            return false;
+        });
+    });
+    var changed = false;
+    function getStorageList() {
+        let list = [];
+        let item = $("div[name='storage-item']");
+        $.each(item,function (i,v) {
+            let m = {};
+            let vv = $(v);
+            /*m.id = vv.find("input[name='storage_id']").val();*/
+            m.type = vv.find("input[name='type']").val();
+            m.path = vv.find("input[name='path']").val();
+            m.size = vv.find("input[name='size']").val();
+            list.push(m);
+        })
+        return list;
+    }
+    function storageChange() {
+        changed = true;
+    }
+    function storageDel(t) {
+        var tt = $(t).parents(".layui-form-item");
+        $(tt).remove();
+    }
+</script>
+</html>

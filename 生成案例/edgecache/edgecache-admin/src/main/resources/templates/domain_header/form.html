@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>domainHeader</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 40px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">域名</label>
+        <div class="layui-input-block">
+            <select id="domainId" lay-filter="domainId" lay-verify="required" name="domainId" class="layui-select">
+                <option th:each="domain : ${domains}" th:value="${domain.id}">[[${domain.url}]]</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">键</label>
+        <div class="layui-input-block">
+            <input type="hidden" id="existKeys" th:value="${headerKeys}">
+            <select id="headerKey" name="headerKey" lay-filter="headerKey" class="layui-select">
+
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide" id="customItem">
+        <label class="layui-form-label">自定义头</label>
+        <div class="layui-input-block">
+            <input type="text" id="customKey"   autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">值</label>
+        <div class="layui-input-block">
+            <input type="text" id="headerValue" name="headerValue" lay-verify="required" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label">同步信息:1待同步,2同步成功,3同步失败</label>
+        <div class="layui-input-block">
+            <input type="text" name="status" value="1" lay-verify="required" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+
+</div>
+</body>
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.$,
+            form = layui.form;
+
+        initKeys();
+
+        setTimeout(function () {
+            form.render();
+        }, 200);
+
+        form.on('select(domainId)', function(data){
+            wb.get("/domain_header/headerKeys/"+data.value,null,function (d) {
+                if (d.code == 0){
+                    $("#headerKey").empty();
+                    $("#headerKey").attr("name","headerKey");
+                    $("#customItem").addClass("layui-hide");
+                    $("#customKey").removeAttr('name');
+                    $("#existKeys").val(d.data);
+                    initKeys();
+                }else{
+                    wb.alert(d);
+                }
+                form.render();
+            });
+        });
+
+        form.on('select(headerKey)', function(data){
+            if (data.value == '自定义'){
+                $("#customItem").removeClass("layui-hide");
+                $("#customKey").attr("name","headerKey");
+                $("#customKey").attr("lay-verify","required");
+                $("#headerKey").removeAttr("name");
+            }else{
+                $("#customItem").addClass("layui-hide");
+                $("#customKey").removeAttr("name");
+                $("#customKey").removeAttr("lay-verify");
+                $("#headerKey").attr("name","headerKey");
+            }
+            console.info($("#headerKey").val());
+            console.info(form.val("form-add-edit"));
+        });
+
+    });
+    function initKeys() {
+        var keys = ["Content-Disposition","Content-Language","Access-Control-Allow-Origin","Access-Control-Allow-Methods","Access-Control-Max-Age","Access-Control-Max-Age","Access-Control-Expose-Headers","自定义"];
+        var existKeys = $("#existKeys").val().split(";");
+        $.each(keys,function (i,v) {
+            if ($.inArray(v,existKeys) == -1){
+                $("#headerKey").append("<option value='"+v+"'>"+v+"</option>");
+            }
+        });
+    }
+</script>
+</html>

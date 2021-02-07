@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>控制台</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>DNS重定向次数
+                                <span class="layui-badge layui-layout-right" style="margin: 12px">今日</span>
+                            </h3>
+                        </div>
+                        <div class="layui-card-body" style="height: 20px;padding: 40px 20px">
+                            <h1 id="dns_count"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>HTTP重定向次数
+                                <span class="layui-badge layui-layout-right" style="margin: 12px">今日</span>
+                            </h3>
+                        </div>
+                        <div class="layui-card-body" style="height: 20px;padding: 40px 20px">
+                            <h1 id="http_count"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>服务带宽峰值
+                                <span class="layui-badge layui-layout-right" style="margin: 12px">今日</span>
+                            </h3>
+                        </div>
+                        <div class="layui-card-body" style="height: 20px;padding: 40px 20px">
+                            <h1 id="server_max"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h3>回源带宽峰值
+                                <span class="layui-badge layui-layout-right" style="margin: 12px">今日</span>
+                            </h3>
+                        </div>
+                        <div class="layui-card-body" style="height: 20px;padding: 40px 20px">
+                            <h1 id="source_max"></h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md8">
+                    <div class="layui-card">
+                        <div class="layui-card-header">今日数据概览</div>
+                        <div class="layui-card-body" style="height: 600px">
+                            <div class="layui-carousel layadmin-carousel layadmin-dataview" lay-filter="LAY-index-dataview">
+                                <div carousel-item id="LAY-index-dataview" style="height: 600px">
+                                    <div id="chart1" style="height: 600px"></div>
+                                    <div id="chart2" style="height: 600px"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md4">
+                    <div class="layui-card">
+                        <div class="layui-card-header">今日状态码分布</div>
+                        <div class="layui-card-body" style="height: 600px">
+                            <div id="chart3" style="height: 600px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    layui.use(['index', 'console']);
+</script>
+</body>
+</html>
+

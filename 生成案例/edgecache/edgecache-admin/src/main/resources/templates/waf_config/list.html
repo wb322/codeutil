@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>wafConfig</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-tab layui-tab-brief layui-card" lay-filter="charts">
+        <ul class="layui-tab-title">
+            <li class="layui-this">配置</li>
+            <li>规则</li>
+            <li>概览</li>
+            <li>日志</li>
+        </ul>
+        <div class="layui-tab-content" >
+            <div class="layui-tab-item layui-show">
+                <table id="list-table" lay-filter="list-table"></table>
+            </div>
+            <div class="layui-tab-item" style="height: 1000px">
+                <iframe src="/menu/waf_rule/list" class="layadmin-iframe2"></iframe>
+            </div>
+            <div class="layui-tab-item layui-row" style="height: 1000px">
+                <div class="layui-card" style="height: 40px;padding:10px">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-input-inline" style="width: 350px">
+                                <input id="time" readonly name="time" lay-filter="machine" placeholder="请选择时间" class="layui-input" >
+                            </div>
+                            <div class="layui-input-inline" style="width: 300px">
+                                <select id="machine" name="machine" lay-filter="machine">
+                                    <option value=''>设备</option>
+
+                                </select>
+                            </div>
+                            <div class="layui-inline layui-btn-group">
+                                <button class="layui-btn change-date-button" data-days="0" title="今天">
+                                    今天
+                                </button>
+                                <button class="layui-btn change-date-button" data-days="-1" data-total="1" title="昨天">
+                                    昨天
+                                </button>
+                                <button class="layui-btn change-date-button" data-days="-6" data-total="7" title="昨天">
+                                    最近一周
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="chart1" class="layui-col-md8" style="height: 650px"></div>
+                <div id="chart2" class="layui-col-md4" style="height: 650px"></div>
+            </div>
+            <div class="layui-tab-item" style="height: 1000px">
+                <iframe src="/menu/nginx_log/list" class="layadmin-iframe2"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="table-toolbar-column">
+    {{#if (d.value == 'off' || d.value == 'on'){}}
+    <input type="checkbox"  id="{{d.key}}" {{ d.value == 'on' ? 'checked':''}} lay-filter="value" lay-skin="switch" lay-text="开启|关闭">
+    {{# }else{ }}
+    <a class="layui-btn layui-btn-xs" lay-event="edit">
+        <i class="layui-icon layui-icon-edit"></i>编辑
+    </a>
+    {{# }}}
+</script>
+<script>
+    layui.use(['index', 'custom-wafConfig', 'table']);
+</script>
+</body>
+</html>

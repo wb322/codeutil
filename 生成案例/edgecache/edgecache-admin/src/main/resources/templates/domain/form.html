@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>domain</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input id="id" type="hidden" name="id" th:value="${key}">
+    <input type="hidden" name="status" value="false">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">域名</label>
+        <div class="layui-input-block">
+            <input id="url" type="text" name="url" lay-verify="required|notEqual" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">源地址</label>
+        <div class="layui-input-inline" style="width: 340px">
+            <input type="text" id="sourceUrl" name="sourceUrl" readonly lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-input-inline" style="width: 40px">
+            <button class="layui-btn" id = "addIpPort">
+                <i class="layui-icon layui-icon-add-1"></i>
+            </button>
+        </div>
+    </div>
+    <div id="ipPortView"></div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">回源方式</label>
+        <div class="layui-input-block">
+            <input type="radio" name="returnSourceType" value="1" title="主备方式">
+            <input type="radio" name="returnSourceType" checked value="2" title="轮询方式">
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+<script type="text/html" id="ipPortTpl">
+    {{#  layui.each(d, function(index, item){ }}
+    {{# if(item != '' ){  }}
+    <div class='layui-form-item' style='padding-left: 60px'>
+        <label class='layui-form-label'>IP地址</label>
+        <div class='layui-input-inline' style='width: 150px'>
+            <input type='text' class='layui-input addIpPort' lay-verify="required|ip" value = '{{ item.split(":")[0]}}'>
+        </div>
+        <label class='layui-form-label' style='width: 30px'>端口</label>
+        <div class='layui-input-inline' style='width: 100px'>
+            <input type='text' class='layui-input addIpPort' lay-verify="port" value='{{ item.split(":")[1]}}'>
+        </div>
+    </div>
+    {{# } }}
+    {{#  }); }}
+</script>
+</body>
+<script>
+    layui.use(['form','laytpl'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            moduleUrl = "/domain/";
+        var laytpl = layui.laytpl;
+        var id = $("#id").val();
+        if (id != ''){
+            wb.get(moduleUrl + id, null, function (d) {
+                if (d.code == 0) {
+                    $("#url").attr("readonly","true");
+                    form.val("form-add-edit", d.data);
+                    var source_url = d.data.sourceUrl;
+                    var source_url_arr = source_url.split(";");
+                    var getTpl = ipPortTpl.innerHTML;
+                    var view = document.getElementById('ipPortView');
+                    laytpl(getTpl).render(source_url_arr, function(html){
+                        view.innerHTML = html;
+                    });
+                }
+            });
+        }
+        $("#addIpPort").on('click',function () {
+            $("#ipPortView").append("<div class='layui-form-item' style='padding-left: 60px'>\n" +
+                "    <label class='layui-form-label'>IP地址</label>\n" +
+                "    <div class='layui-input-inline' style='width: 150px'>\n" +
+                "        <input type='text' class='layui-input addIpPort' lay-verify=\"required|ip\">\n" +
+                "    </div>\n" +
+                "    <label class='layui-form-label' style='width: 30px'>端口</label>\n" +
+                "    <div class='layui-input-inline' style='width: 100px'>\n" +
+                "        <input type='text' class='layui-input addIpPort' lay-verify=\"port\">\n" +
+                "    </div>\n" +
+                "</div>");
+        });
+        $("#ipPortView").on('blur','.addIpPort',function () {
+            var item = $("#ipPortView").find('.layui-form-item');
+            var sourceUrl = '';
+            for (let i = 0; i < item.length; i++) {
+                var input_arr = $(item[i]).find('input');
+                var ip = $(input_arr[0]).val();
+                sourceUrl += ip
+                var port = $(input_arr[1]).val();
+                if (port == ''){
+                    sourceUrl += ";";
+                }else{
+                    sourceUrl += ":" + port + ";";
+                }
+            }
+            $("#sourceUrl").val(sourceUrl.substr(0,sourceUrl.length -1));
+        });
+        form.verify({
+            ip: [
+                /^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$/
+                ,'IP不符合格式'
+            ],
+            port: function(value, item){
+                if (value < 0 || value > 65535){
+                    return '端口可选值为0-65535';
+                }
+            },
+            notEqual: function (value, item) {
+                var b = false;
+                if (id == '') {
+                    wb.get(moduleUrl + "exist/" + value,null,function (d) {
+                        b = d;
+                    },{async: false});
+                }
+                if (b){
+                    return "域名已存在";
+                }
+            }
+        });
+    });
+</script>
+</html>

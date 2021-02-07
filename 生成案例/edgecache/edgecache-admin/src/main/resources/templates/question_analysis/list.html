@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>ip</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<style>
+    .error-color{
+        color: #ff0000;
+    }
+    .success-color{
+        color: #2b2b2b;
+    }
+    .layui-timeline-axis{
+        color: #000000;
+    }
+</style>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header layuiadmin-card-header-auto">
+            <form class="layui-form" onsubmit="return false">
+                <div class="layui-form-item" >
+                    <div class="layui-inline layui-show-xs-block">
+                        <input type="hidden" id="key" th:value="${key}">
+                        <select id="machineSel" name="machine" th:each="machine : ${machines}">
+                            <option th:value='${machine.id}' th:selected="${id == machine.id}">[[${machine.ip}]]</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline layui-btn-group">
+                        <button class="layui-btn layui-anim layui-anim-scale" id="start_test">开始检测</button>
+                        <button class="layui-btn layui-hide layui-anim layui-anim-scale" id="restart_test">重新检测</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-card-body">
+            <div style="width:580px">
+                <div class="layui-progress layui-progress-big" lay-filter="demo" lay-showPercent="true">
+                    <div class="layui-progress-bar" lay-percent="0%"></div>
+                </div>
+            </div>
+            <ul class="layui-timeline" style="padding-top: 20px" id="test">
+                <li class="layui-timeline-item" id="machine">
+                    <i class="layui-icon layui-timeline-axis layui-icon-circle"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">
+                            设备状态检测
+                        </h3>
+                        <ul>
+                            <li>DPI接口状态</li>
+                            <li>缓存服务接口状态</li>
+                            <li>负载是否正常</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="layui-timeline-item" id="app">
+                    <i class="layui-icon layui-timeline-axis layui-icon-circle"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">核心程序运行状态检测</h3>
+                        <ul>
+                            <li>DPI程序</li>
+                            <li>负载均衡程序</li>
+                            <li>缓存服务程序</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="layui-timeline-item" id="network">
+                    <i class="layui-icon layui-timeline-axis layui-icon-circle"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">网络联通性测试</h3>
+                        <ul>
+                            <li>控制中心网络</li>
+                            <li>MOOC源站测试</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="layui-timeline-item" id="ok">
+                    <i class="layui-icon layui-timeline-axis layui-icon-circle layui-anim"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <div class="layui-timeline-title">检测完成</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+
+    layui.use(['index','custom-questionAnalysis']);
+</script>
+</body>
+</html>

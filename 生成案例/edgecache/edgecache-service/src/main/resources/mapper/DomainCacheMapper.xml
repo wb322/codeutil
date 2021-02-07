@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.DomainCacheMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.DomainCache">
+		<id column="id" property="id" />
+		<result column="domain_id" property="domainId" />
+		<result column="cache_type" property="cacheType" />
+		<result column="cache_content" property="cacheContent" />
+		<result column="cache_time" property="cacheTime" />
+		<result column="limit_time" property="limitTime" />
+		<result column="weight" property="weight" />
+		<result column="status" property="status" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,domain_id
+		,cache_type
+		,cache_content
+		,cache_time
+		,limit_time
+		,weight
+		,status
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="domainId != null and domainId != ''" > AND domain_id = #{domainId}</if>
+        <if test="cacheType != null and cacheType != ''" > AND cache_type = #{cacheType}</if>
+        <if test="cacheContent != null and cacheContent != ''" > AND cache_content = #{cacheContent}</if>
+        <if test="cacheTime != null and cacheTime != ''" > AND cache_time = #{cacheTime}</if>
+        <if test="limitTime != null and limitTime != ''" > AND limit_time = #{limitTime}</if>
+        <if test="weight != null and weight != ''" > AND weight = #{weight}</if>
+        <if test="status != null and status != ''" > AND status = #{status}</if>
+
+    </sql>
+
+</mapper>

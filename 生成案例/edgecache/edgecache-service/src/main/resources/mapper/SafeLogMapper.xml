@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.SafeLogMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.SafeLog">
+		<id column="id" property="id" />
+		<result column="username" property="username" />
+		<result column="terminal" property="terminal" />
+		<result column="connected" property="connected" />
+		<result column="start" property="start" />
+		<result column="end" property="end" />
+		<result column="still" property="still" />
+		<result column="line" property="line" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,username
+		,terminal
+		,connected
+		,start
+		,end
+		,still
+		,line
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="username != null and username != ''" > AND username = #{username}</if>
+        <if test="terminal != null and terminal != ''" > AND terminal = #{terminal}</if>
+        <if test="connected != null and connected != ''" > AND connected = #{connected}</if>
+        <if test="start != null and start != ''" > AND start = #{start}</if>
+        <if test="end != null and end != ''" > AND end = #{end}</if>
+        <if test="still != null and still != ''" > AND still = #{still}</if>
+        <if test="line != null and line != ''" > AND line = #{line}</if>
+
+    </sql>
+
+</mapper>

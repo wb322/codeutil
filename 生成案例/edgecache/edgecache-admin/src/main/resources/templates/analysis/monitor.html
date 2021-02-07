@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>控制台</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card" style="height: 40px;padding:10px">
+        <form class="layui-form" >
+            <div class="layui-form-item">
+                <div class="layui-input-inline" style="width: 350px">
+                    <input id="time" name="time" readonly placeholder="请选择时间" class="layui-input" >
+                </div>
+                <div class="layui-input-inline" style="width: 300px;">
+                    <select id="machine" name="machine" lay-filter="machine">
+                        <option value=''>设备</option>
+
+                    </select>
+                </div>
+                <div class="layui-inline layui-btn-group">
+                    <button class="layui-btn change-date-button" data-days="0" title="今天">
+                        今天
+                    </button>
+                    <button class="layui-btn change-date-button" data-days="-1" data-total="1" title="昨天">
+                        昨天
+                    </button>
+                    <button class="layui-btn change-date-button" data-days="-6" data-total="7" title="昨天">
+                        最近一周
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="layui-tab layui-tab-brief layui-card" lay-filter="charts">
+        <ul class="layui-tab-title">
+            <li class="layui-this">机器数据</li>
+        </ul>
+        <div class="layui-tab-content" style="height: 650px;">
+            <div class="layui-tab-item layui-show">
+                <div id="cpu" class="layui-col-md12" style="height: 650px"></div>
+                <!--<div class="layui-row" style="padding-top: 30px">
+                    <div id="cpu" class="layui-col-md6" style="height: 300px"></div>
+                    <div id="disk" class="layui-col-md6" style="height: 300px"></div>
+                </div>
+                <div class="layui-row" style="padding-top: 30px">
+                    <div id="serverLoad" class="layui-col-md6" style="height: 300px"></div>
+                    <div id="traffic" class="layui-col-md6" style="height: 300px"></div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['index','custom-analysisMonitor']);
+</script>
+</body>
+</html>

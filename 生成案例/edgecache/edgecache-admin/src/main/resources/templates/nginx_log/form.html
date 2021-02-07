@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>nginxLog</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户IP</label>
+        <div class="layui-input-block">
+            <input type="text" name="clientIp" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">时间</label>
+        <div class="layui-input-block">
+            <input type="text" name="msec" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">请求协议</label>
+        <div class="layui-input-block">
+            <input type="text" name="serverProtocol" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">域名</label>
+        <div class="layui-input-block">
+            <input type="text" name="host" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">Http响应状态码</label>
+        <div class="layui-input-block">
+            <input type="text" name="status" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">缓存状态码</label>
+        <div class="layui-input-block">
+            <input type="text" name="cacheCode" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">响应大小</label>
+        <div class="layui-input-block">
+            <input type="text" name="bytesSent" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">HTTP方法</label>
+        <div class="layui-input-block">
+            <input type="text" name="requestMethod" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">请求URL</label>
+        <div class="layui-input-block">
+            <input type="text" name="url" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">后端信息</label>
+        <div class="layui-input-block">
+            <input type="text" name="upstreamAddr" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">后端HTTP状态码</label>
+        <div class="layui-input-block">
+            <input type="text" name="upstreamStatus" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">请求大小</label>
+        <div class="layui-input-block">
+            <input type="text" name="rbsize" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上游缓存状态码</label>
+        <div class="layui-input-block">
+            <input type="text" name="hier" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">服务IP</label>
+        <div class="layui-input-block">
+            <input type="text" name="serverAddr" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">内容类型</label>
+        <div class="layui-input-block">
+            <input type="text" name="contentType" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">Refer</label>
+        <div class="layui-input-block">
+            <input type="text" name="httpReferer" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">客户端类型</label>
+        <div class="layui-input-block">
+            <input type="text" name="httpUserAgent" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">下载时长</label>
+        <div class="layui-input-block">
+            <input type="text" name="requestTime" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上游IP</label>
+        <div class="layui-input-block">
+            <input type="text" name="parentIp" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">COOKIE</label>
+        <div class="layui-input-block">
+            <input type="text" name="httpCookie" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">分片</label>
+        <div class="layui-input-block">
+            <input type="text" name="httpRange" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上游HTTP状态码</label>
+        <div class="layui-input-block">
+            <input type="text" name="parentRespCode" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">请求ID</label>
+        <div class="layui-input-block">
+            <input type="text" name="requestid" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">事务完成状态</label>
+        <div class="layui-input-block">
+            <input type="text" name="requestCompletion" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">跳数</label>
+        <div class="layui-input-block">
+            <input type="text" name="requestHop" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">下游IP</label>
+        <div class="layui-input-block">
+            <input type="text" name="remoteAddr" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">防护类型</label>
+        <div class="layui-input-block">
+            <input type="text" name="denyType" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">响应头-文件大小</label>
+        <div class="layui-input-block">
+            <input type="text" name="clength" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            moduleUrl = "/nginx_log/";
+        setTimeout(function () {
+            form.render();
+        },100);
+    });
+</script>
+</html>

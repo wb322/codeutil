@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.DomainMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.Domain">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="source_url" property="sourceUrl" />
+		<result column="return_source_type" property="returnSourceType" />
+		<result column="update_time" property="updateTime" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,name
+		,source_url
+		,return_source_type
+		,update_time
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="name != null and name != ''" > AND name = #{name}</if>
+        <if test="sourceUrl != null and sourceUrl != ''" > AND source_url = #{sourceUrl}</if>
+        <if test="returnSourceType != null and returnSourceType != ''" > AND return_source_type = #{returnSourceType}</if>
+        <if test="updateTime != null and updateTime != ''" > AND update_time = #{updateTime}</if>
+
+    </sql>
+
+</mapper>

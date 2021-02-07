@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>redirectRule</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+    <div class="layui-form-item">
+        <label class="layui-form-label">规则类型</label>
+        <div class="layui-input-block">
+            <select name="type" class="layui-select" lay-filter="type">
+                <option value="DNS">DNS</option>
+                <option value="HTTP">HTTP</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">名单类型</label>
+        <div class="layui-input-block">
+            <select name="rosterType" class="layui-select">
+                <option value="1">白名单</option>
+                <option value="2">黑名单</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" >
+        <label class="layui-form-label">匹配规则</label>
+        <div class="layui-input-block">
+            <input type="text" name="rule" lay-verify="required" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" id="vhostItem">
+        <label class="layui-form-label">vhost</label>
+        <div class="layui-input-block">
+            <input type="text" name="vhost" lay-verify="url" placeholder="HTTP规则可选项" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">重定向IP</label>
+        <div class="layui-input-block">
+            <input type="text" name="ips" lay-verify="required|ip" placeholder="用;分隔" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.$,
+            form = layui.form;
+        setTimeout(function () {
+            form.render();
+        },100);
+        $("#vhostItem").hide();
+        form.on('select(type)',function (data){
+            if (data.value === 'DNS'){
+                $("#vhostItem").hide();
+            }else{
+                $("#vhostItem").show();
+            }
+        });
+        form.verify({
+            url: function(value, item){
+                var reg = /^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$/;
+                /*^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$*/
+                if (value != '' && !reg.test(value)){
+                    return 'URL不符合格式';
+                }
+            },
+            ip: function(value, item) {
+                var reg = /^((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$/;
+                var valdata = value.split(';');
+                for(var i=0;i<valdata.length;i++){
+                    if(reg.test(valdata[i])== false){
+                        return 'IP不符合格式';
+                    }
+                }
+            }
+
+        });
+    });
+</script>
+</html>

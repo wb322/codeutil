@@ -1,0 +1,53 @@
+server: 
+  port: 8080
+  servlet:
+    encoding:
+      charset: utf-8
+spring: 
+  application:  
+    name: edgecache
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver #com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.2.225:3306/edgecache?characterEncoding=UTF8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  jpa:
+    hibernate:
+      ddl-auto: none
+      #naming:
+        #physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl#不使用驼峰命名
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true  #格式化sql语句
+      open-in-view: true
+
+  devtools:
+    restart:
+      enabled: true
+# admin
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#日志
+logging:
+  config: classpath:log/log4j2_dev.xml
+#自定义配置
+custom:
+  savetime:
+    nginx: 7
+    safe: 7
+  path:
+    ansible: /etc/ansible/hosts #ansible hosts地址
+    tpl:  #模板文件路径，默认为空
+    install: /home/bv/ #安装地址
+
+
+

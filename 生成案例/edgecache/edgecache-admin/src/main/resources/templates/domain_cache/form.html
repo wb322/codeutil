@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>domainCache</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">域名</label>
+        <div class="layui-input-block">
+            <select  name="domainId" class="layui-select">
+                <option th:each="domain : ${domains}" th:value="${domain.id}">[[${domain.url}]]</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block">
+            <select name="cacheType">
+                <option value="1">文件类型</option>
+                <option value="2">文件夹</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">缓存时间</label>
+        <div class="layui-input-inline" style="width: 200px;">
+            <input type="text" name="cacheTime" lay-verify="required" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-input-inline" style="width: 100px">
+            <select name="limitTime" class="layui-select">
+                <option value="d">天</option>
+                <option value="h">小时</option>
+                <option value="m">分钟</option>
+                <option value="s">秒</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">缓存的内容</label>
+        <div class="layui-input-block">
+            <textarea placeholder="多条时用 ; 分隔" name="cacheContent" rows="2" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">优先级</label>
+        <div class="layui-input-block">
+            <input type="text" name="weight" lay-verify="required" placeholder="数字越大越优先" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label">同步状态</label>
+        <div class="layui-input-block">
+            <input type="text" name="status" lay-verify="required" placeholder="请输入" autocomplete="off"
+                   class="layui-input" value="1">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.$,
+            form = layui.form;
+        setTimeout(function () {
+            form.render();
+        },100);
+    });
+</script>
+</html>

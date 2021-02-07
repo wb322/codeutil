@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>wafConfig</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_waf_enable</label>
+        <div class="layui-input-block">
+            <input type="text" name="configWafEnable" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_white_url_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configWhiteUrlCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_white_ip_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configWhiteIpCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_black_ip_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configBlackIpCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_url_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configUrlCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_url_args_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configUrlArgsCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_user_agent_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configUserAgentCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_cookie_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configCookieCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_cc_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configCcCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_cc_rate</label>
+        <div class="layui-input-block">
+            <input type="text" name="configCcRate" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_post_check</label>
+        <div class="layui-input-block">
+            <input type="text" name="configPostCheck" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_waf_model</label>
+        <div class="layui-input-block">
+            <input type="text" name="configWafModel" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_waf_redirect_url</label>
+        <div class="layui-input-block">
+            <input type="text" name="configWafRedirectUrl" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_output_html</label>
+        <div class="layui-input-block">
+            <input type="text" name="configOutputHtml" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_log_dir</label>
+        <div class="layui-input-block">
+            <input type="text" name="configLogDir" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">config_rule_dir</label>
+        <div class="layui-input-block">
+            <input type="text" name="configRuleDir" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">1：待同步 2：同步成功 3：同步失败</label>
+        <div class="layui-input-block">
+            <input type="text" name="syncStatus" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">版本号</label>
+        <div class="layui-input-block">
+            <input type="text" name="version" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            moduleUrl = "/waf_config/";
+        setTimeout(function () {
+            form.render();
+        },100);
+    });
+</script>
+</html>

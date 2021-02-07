@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>sysMenu</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">菜单</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">url</label>
+        <div class="layui-input-block">
+            <input type="text" name="url" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block">
+            <select name="type" >
+                <option value="0">分类</option>
+                <option value="1">菜单</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级菜单</label>
+        <div class="layui-input-block">
+            <input type="hidden" name="pid" id="pid" >
+            <select id="pid_Sel" lay-search lay-filter="pid">
+                <option>无</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图标</label>
+        <div class="layui-input-block">
+            <input type="text" name="icon" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            moduleUrl = "/sys_menu/";
+        wb.get(moduleUrl, null, function (d) {
+            if (d.code == 0) {
+                $.each(d.data, function (e, v) {
+                    if ($("#pid").val() == v.id) {
+                        $("#pid_Sel").append("<option value='" + v.id + "' selected>" + v.name + "</option>");
+                    } else {
+                        $("#pid_Sel").append("<option value='" + v.id + "'>" + v.name + "</option>");
+                    }
+                })
+                form.render();
+            }
+        });
+        form.on('select(pid)',function (data) {
+            var pid = data.value;
+            $("#pid").val(pid);
+        });
+    });
+</script>
+</html>

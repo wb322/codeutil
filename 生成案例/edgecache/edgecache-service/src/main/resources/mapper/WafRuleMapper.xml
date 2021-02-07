@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.WafRuleMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.WafRule">
+		<id column="id" property="id" />
+		<result column="ruleType" property="ruleType" />
+		<result column="ruleItem" property="ruleItem" />
+		<result column="syncStatus" property="syncStatus" />
+		<result column="version" property="version" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,ruleType
+		,ruleItem
+		,syncStatus
+		,version
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="ruleType != null and ruleType != ''" > AND ruleType = #{ruleType}</if>
+        <if test="ruleItem != null and ruleItem != ''" > AND ruleItem = #{ruleItem}</if>
+        <if test="syncStatus != null and syncStatus != ''" > AND syncStatus = #{syncStatus}</if>
+        <if test="version != null and version != ''" > AND version = #{version}</if>
+
+    </sql>
+
+</mapper>

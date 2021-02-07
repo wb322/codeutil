@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>domainCacheRefresh</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block">
+            <select class="layui-select" name="type">
+                <option th:if="${key == '1'}" value="1">预缓存</option>
+                <option th:if="${key == '2'}" value="2">内容刷新</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">开始时间</label>
+        <div class="layui-input-block">
+            <input type="hidden" id="start" name="start" lay-verify="required" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+            <input type="hidden" id="end" name="end" lay-verify="required" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+            <input type="text" class="layui-input" id="time" readonly placeholder="请选择范围" autocomplete="off">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">内容</label>
+        <div class="layui-input-block">
+            <textarea name="content" class="layui-textarea" rows="15" placeholder="每行一条"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['form', 'laydate'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            moduleUrl = "/domain_cache_refresh/",
+            laydate = layui.laydate;
+        laydate.render({
+            elem: '#time',
+            type: 'datetime',
+            range: true,
+            done: function (value, date, endDate) {
+                var dateArr = value.split(" - ");
+                $("#start").val(dateArr[0]);
+                $("#end").val(dateArr[1]);
+            }
+        });
+        setTimeout(function () {
+            form.render();
+        }, 100);
+    });
+</script>
+</html>

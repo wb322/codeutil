@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>edgecache后台管理</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body class="layui-layout-body">
+<div id="LAY_app">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <!-- 头部区域 -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item layadmin-flexible" lay-unselect>
+                    <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                        <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                    </a>
+                </li>
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;" layadmin-event="refresh" title="刷新">
+                        <i class="layui-icon layui-icon-refresh-3"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+                <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                    <form class="layui-form" style="margin-top: -4px" lay-filter="cdnForm">
+                        <input type="checkbox" id="cdn" lay-filter="cdn" lay-skin="switch" lay-text="CDN模式|缓存模式" th:checked="${cdn}">
+                    </form>
+                </li>
+                <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                    <a href="javascript:;" layadmin-event="note">
+                        <i class="layui-icon layui-icon-note"></i>
+                    </a>
+                </li>
+
+                <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                    <a href="javascript:;" layadmin-event="fullscreen">
+                        <i class="layui-icon layui-icon-screen-full"></i>
+                    </a>
+                </li>
+                <!--<li class="layui-nav-item layui-hide-xs" lay-unselect>
+                    <a href="javascript:;" layadmin-event="theme">
+                        <i class="layui-icon layui-icon-theme"></i>
+                    </a>
+                </li>-->
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;">
+                        <cite>[[${session.login_user}]]</cite>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <!--<dd><a lay-href="set/user/info.html">基本资料</a></dd>-->
+                        <dd layadmin-event="password"><a>修改密码</a></dd>
+                        <hr>
+                        <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                    <a href="javascript:;" layadmin-event=""><i
+                            class="layui-icon layui-icon-more-vertical"></i></a>
+                </li>
+                <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+                    <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 侧边菜单 -->
+        <div class="layui-side layui-side-menu">
+            <div class="layui-side-scroll">
+                <div class="layui-logo" lay-href="home/console.html" ><!--style="background-color: #009688 !important;"-->
+                    <span>[[${setting.name}]]</span>
+                </div>
+
+                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
+                    lay-filter="layadmin-system-side-menu">
+                    <li data-name="home" class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;" lay-tips="主页" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>主页</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd data-name="console" class="layui-this">
+                                <a lay-href="home/console.html">控制台</a>
+                            </dd>
+                        </dl>
+                    </li>
+
+                    <li th:each="menu : ${menus}" th:if="${menu.status==0 && menu.type ==0 && menu.pid == null}" data-name="" class="layui-nav-item">
+                        <a href="javascript:;" th:lay-tips="${menu.name}" lay-direction="2">
+                            <i th:class="|layui-icon ${menu.icon}|"></i>
+                            <cite>[[${menu.name}]]</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd th:each="child : ${menus}" th:if="${child.status==0 && child.type ==1 && child.pid == menu.id}">
+                                <a th:lay-href="${child.url}">[[${child.name}]]</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 页面标签 -->
+        <div class="layadmin-pagetabs" id="LAY_app_tabs">
+            <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+            <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+            <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;"></a>
+                        <dl class="layui-nav-child layui-anim-fadein">
+                            <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                            <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                            <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+                <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                    <li lay-id="home/console.html" lay-attr="home/console.html" class="layui-this"><i
+                            class="layui-icon layui-icon-home"></i></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- 主体内容 -->
+        <div class="layui-body" id="LAY_app_body">
+            <div class="layadmin-tabsbody-item layui-show">
+                <iframe src="/console" frameborder="0" class="layadmin-iframe"></iframe>
+            </div>
+        </div>
+
+        <!-- 辅助元素，一般用于移动设备下遮罩 -->
+        <div class="layadmin-body-shade" layadmin-event="shade"></div>
+    </div>
+</div>
+
+<script>
+    layui.use(["index",'form'],function () {
+        let form = layui.form;
+        form.on('switch(cdn)', function(data){
+            let cdn = data.elem.checked;
+            layer.confirm('您确认修改系统运行模式吗?', {icon: 3, title:'提示'}, function(index){
+                wb.put("/sys_setting/cdn/" + cdn,null,function (d) {
+                    if (d.code == 0){
+                        layer.msg('运行模式已修改,正在重新加载', {
+                            icon: 16
+                            ,shade: 0.01
+                        });
+                    }else{
+                        layer.msg(d.msg + ',正在重新加载', {
+                            icon: 5
+                            ,shade: 0.01
+                        });
+                    }
+                    setTimeout(function () {
+                        parent.location.reload();
+                    },2000);
+                })
+                layer.close(index);
+            });
+            var that = data.elem;
+            $(that).prop('checked',!cdn);
+            form.render('checkbox');
+        });
+    });
+</script>
+</body>
+</html>
+
+

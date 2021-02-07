@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.MachineMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.Machine">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="system" property="system" />
+		<result column="disk" property="disk" />
+		<result column="memory" property="memory" />
+		<result column="cpu" property="cpu" />
+		<result column="network" property="network" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,name
+		,system
+		,disk
+		,memory
+		,cpu
+		,network
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="name != null and name != ''" > AND name = #{name}</if>
+        <if test="system != null and system != ''" > AND system = #{system}</if>
+        <if test="disk != null and disk != ''" > AND disk = #{disk}</if>
+        <if test="memory != null and memory != ''" > AND memory = #{memory}</if>
+        <if test="cpu != null and cpu != ''" > AND cpu = #{cpu}</if>
+        <if test="network != null and network != ''" > AND network = #{network}</if>
+
+    </sql>
+
+</mapper>

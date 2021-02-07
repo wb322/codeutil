@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>machineDpi</title>
+    <th:block th:replace="head::jsCss"></th:block>
+</head>
+<body>
+<div class="layui-form" lay-filter="form-add-edit" id="form-add-edit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" name="id">
+
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label">机器ID</label>
+        <div class="layui-input-block">
+            <input type="text" name="machineId" th:value="${key}" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">分析接口</label>
+        <div class="layui-input-block">
+            <input type="text" name="network" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">接口状态</label>
+        <div class="layui-input-block">
+            <input type="text" name="networkStatus" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">接口速度</label>
+        <div class="layui-input-block">
+            <input type="text" name="networkSpeed" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">存储服务器</label>
+        <div class="layui-input-block">
+            <input type="text" name="storageServer" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">统计服务器</label>
+        <div class="layui-input-block">
+            <input type="text" name="statisticsServer" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+            <input type="text" name="status" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">安装目录</label>
+        <div class="layui-input-block">
+            <input type="text" name="installDir" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">安装版本</label>
+        <div class="layui-input-block">
+            <input type="text" name="installVersion" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label">默认配置</label>
+        <div class="layui-input-block">
+            <input type="text" name="defaultConfig" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <input type="button" class="layui-btn" lay-submit lay-filter="form-add-submit" value="提交">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="form-add-submit" id="form-add-submit" value="add">
+        <input type="button" lay-submit lay-filter="form-edit-submit" id="form-edit-submit" value="edit">
+    </div>
+</div>
+</div>
+</body>
+<script>
+    layui.use(['index','form'], function () {
+        var $ = layui.$,
+            form = layui.form,
+            moduleUrl = "/machine_dpi/";
+
+        var oldData;
+        var machineId = $("input[name='machineId']").val();
+        wb.get(moduleUrl+"config/" + machineId,null,function (d) {
+            if (d.code == 0){
+                oldData = d.data;
+                form.val("form-add-edit",d.data);
+            }
+        })
+
+        form.on('submit(form-add-submit)',function (data) {
+            var d = data.field;
+            var default_config = 1;
+            $.each(oldData,function (k,v) {
+                var item = d[k];
+                if (v != item){
+                    default_config = 0;
+                }
+            });
+            if (default_config == 1){
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                return false;
+            }else{
+                if (oldData.defaultConfig == 1){
+                    delete d["id"];
+                    d.defaultConfig = 0;
+                }
+            }
+            wb.post(moduleUrl,d,function (d) {
+                if (d.code == 0){
+                    layer.alert(d.msg, {icon: 6},function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    });
+                }else{
+                    layer.alert(d.msg, {icon: 5});
+                }
+            })
+            return false;
+        });
+    });
+</script>
+</html>

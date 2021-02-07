@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.MachineDpiMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.MachineDpi">
+		<id column="id" property="id" />
+		<result column="machine_id" property="machineId" />
+		<result column="interface" property="interface" />
+		<result column="interface_status" property="interfaceStatus" />
+		<result column="interface_speed" property="interfaceSpeed" />
+		<result column="storage_server" property="storageServer" />
+		<result column="statistics_server" property="statisticsServer" />
+		<result column="using" property="using" />
+		<result column="install_dir" property="installDir" />
+		<result column="install_version" property="installVersion" />
+		<result column="default" property="default" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,machine_id
+		,interface
+		,interface_status
+		,interface_speed
+		,storage_server
+		,statistics_server
+		,using
+		,install_dir
+		,install_version
+		,default
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="machineId != null and machineId != ''" > AND machine_id = #{machineId}</if>
+        <if test="interface != null and interface != ''" > AND interface = #{interface}</if>
+        <if test="interfaceStatus != null and interfaceStatus != ''" > AND interface_status = #{interfaceStatus}</if>
+        <if test="interfaceSpeed != null and interfaceSpeed != ''" > AND interface_speed = #{interfaceSpeed}</if>
+        <if test="storageServer != null and storageServer != ''" > AND storage_server = #{storageServer}</if>
+        <if test="statisticsServer != null and statisticsServer != ''" > AND statistics_server = #{statisticsServer}</if>
+        <if test="using != null and using != ''" > AND using = #{using}</if>
+        <if test="installDir != null and installDir != ''" > AND install_dir = #{installDir}</if>
+        <if test="installVersion != null and installVersion != ''" > AND install_version = #{installVersion}</if>
+        <if test="default != null and default != ''" > AND default = #{default}</if>
+
+    </sql>
+
+</mapper>

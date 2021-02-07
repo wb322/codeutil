@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.MachineAppMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.MachineApp">
+		<id column="id" property="id" />
+		<result column="machine_id" property="machineId" />
+		<result column="dpi" property="dpi" />
+		<result column="dpi_config" property="dpiConfig" />
+		<result column="cache" property="cache" />
+		<result column="cache_config" property="cacheConfig" />
+		<result column="web" property="web" />
+		<result column="web_config" property="webConfig" />
+		<result column="gslb" property="gslb" />
+		<result column="gslb_config" property="gslbConfig" />
+		<result column="status" property="status" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,machine_id
+		,dpi
+		,dpi_config
+		,cache
+		,cache_config
+		,web
+		,web_config
+		,gslb
+		,gslb_config
+		,status
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="machineId != null and machineId != ''" > AND machine_id = #{machineId}</if>
+        <if test="dpi != null and dpi != ''" > AND dpi = #{dpi}</if>
+        <if test="dpiConfig != null and dpiConfig != ''" > AND dpi_config = #{dpiConfig}</if>
+        <if test="cache != null and cache != ''" > AND cache = #{cache}</if>
+        <if test="cacheConfig != null and cacheConfig != ''" > AND cache_config = #{cacheConfig}</if>
+        <if test="web != null and web != ''" > AND web = #{web}</if>
+        <if test="webConfig != null and webConfig != ''" > AND web_config = #{webConfig}</if>
+        <if test="gslb != null and gslb != ''" > AND gslb = #{gslb}</if>
+        <if test="gslbConfig != null and gslbConfig != ''" > AND gslb_config = #{gslbConfig}</if>
+        <if test="status != null and status != ''" > AND status = #{status}</if>
+
+    </sql>
+
+</mapper>

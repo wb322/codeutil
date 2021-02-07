@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bitvalue.edgecache.dao.DomainHeaderMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bitvalue.edgecache.entity.DomainHeader">
+		<id column="id" property="id" />
+		<result column="domain_id" property="domainId" />
+		<result column="header_key" property="headerKey" />
+		<result column="header_value" property="headerValue" />
+		<result column="status" property="status" />
+
+    </resultMap>
+    <!-- 通用查询结果 -->
+    <sql id="Base_Column_List">
+		id
+		,domain_id
+		,header_key
+		,header_value
+		,status
+
+    </sql>
+    <!-- 通用查询条件 -->
+    <sql id="Base_Criteria">
+        <if test="id != null and id != ''" > AND id = #{id}</if>
+        <if test="domainId != null and domainId != ''" > AND domain_id = #{domainId}</if>
+        <if test="headerKey != null and headerKey != ''" > AND header_key = #{headerKey}</if>
+        <if test="headerValue != null and headerValue != ''" > AND header_value = #{headerValue}</if>
+        <if test="status != null and status != ''" > AND status = #{status}</if>
+
+    </sql>
+
+</mapper>

@@ -1,0 +1,12 @@
+package com.bitvalue.edgecache.dao;
+
+import org.springframework.stereotype.Repository;
+import com.bitvalue.edgecache.entity.ContentRefreshTask;
+/**
+ * contentRefreshTask数据访问接口
+ * @author wubo
+ */
+@Repository
+public interface ContentRefreshTaskDao extends BaseDao<ContentRefreshTask,Integer>{
+	
+}
